@@ -7,7 +7,7 @@
         {
             if (self::$conexion === null) 
             {
-                self::$conexion = new PDO('mysql:host=localhost;dbname=test', 'antonio', 'root');
+                self::$conexion = new PDO('mysql:host=localhost;dbname=autoescuela', 'antonio', 'root');
             }
             return self::$conexion;
         }
