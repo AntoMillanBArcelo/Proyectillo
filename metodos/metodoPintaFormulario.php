@@ -1,12 +1,13 @@
 <?php
     function crearFormularioRegistro() 
     {
+        echo '<h2>Registro</h2>';
         echo '<form method="post" action="">';
         echo '<label for="correo">Correo Electrónico:</label><br>';
         echo '<input type="email" id="correo" name="correo" required><br>';
         echo '<label for="contrasena">Contraseña:</label><br>';
         echo '<input type="password" id="contrasena" name="contrasena" required><br>';
-        echo '<input type="submit" value="Registrarse">';
+        echo '<input type="submit" value="Registrarse" name="Registrarse">';
         echo '</form>';
 
         echo '<p>¿Ya tienes una cuenta? <a href="login.php">Iniciar Sesión</a></p>';
