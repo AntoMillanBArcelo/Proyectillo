@@ -6,13 +6,11 @@
         }
     
         public function getById($id) {
-            // Recupera un usuario por su ID de la base de datos y devuelve un objeto Usuario
-            // Implementa la lógica para consultar la base de datos y crear un objeto Usuario
+          
         }
     
         public function getByCorreo($correo) {
-            // Recupera un usuario por su correo de la base de datos y devuelve un objeto Usuario
-            // Implementa la lógica para consultar la base de datos y crear un objeto Usuario
+
         }
     
         public function insert( $correo, $contrasena) {
