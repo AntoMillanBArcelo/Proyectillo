@@ -1,6 +1,6 @@
 <?php
 include 'metodos/metodoPintaFormulario.php';
-include 'entidades/usuario.php';
+include 'clases/Usuario.php';
 include 'repositorio/repoUsuario.php';
 include 'db/db.php';
 $con = db::obtenerConexion();

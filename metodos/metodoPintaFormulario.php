@@ -21,7 +21,7 @@ function crearFormularioLogin()
         echo '<input type="email" id="correo" name="correo" maxlength="50" required><br>';
         echo '<label for="contrasena">Contraseña:</label><br>';
         echo '<input type="password" id="contrasena" name="contrasena" maxlength="50" required><br>';
-        echo '<input type="submit" value="Iniciar Sesión">';
+        echo '<input type="submit" value="Iniciar Sesión" name="IniciarSesion">';
         echo '</form>';
 
         echo '<p>¿No tienes una cuenta? <a href="register.php">Registrarse</a></p>';

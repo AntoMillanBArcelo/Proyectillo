@@ -21,7 +21,7 @@ window.addEventListener("load", function()
                     var pregAux = pregunta.cloneNode(true);
                     pregAux.getElementsByClassName("id")[0].innerHTML=y.preguntas[i].id;
                     pregAux.getElementsByClassName("categoria")[0].innerHTML=y.preguntas[i].categoria;
-                    pregAux.getElementsByClassName("dificultad")[0].innerHTML=y[i].dificultad;
+                    pregAux.getElementsByClassName("dificultad")[0].innerHTML=y.preguntas[i].dificultad;
                     pregAux.getElementsByClassName("borrar")[0].onclick=function()
                     {
                         var auxPadre = this;

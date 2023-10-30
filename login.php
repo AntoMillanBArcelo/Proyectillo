@@ -1,33 +1,36 @@
 <?php
 include 'metodos/metodoPintaFormulario.php';
-include 'entidades/usuario.php';
+include 'clases/Usuario.php';
 include 'repositorio/repoUsuario.php';
 include 'db/db.php';
 $con = db::obtenerConexion();
 crearFormularioLogin();
 session_start();
 
-if (isset($_POST['Iniciar Sesión'])) {
+
+if (isset($_POST['IniciarSesion'])) 
+{
     $correo = $_POST['correo'];
     $contrasena = $_POST['contrasena'];
-    
-    // Validar el inicio de sesión
-    $rUsuario = new repoUsuario($con); // $con es tu conexión a la base de datos
-    $usuario = $rUsuario->getByCorreo($correo);
+    $contrasenaEncript = md5($contrasena);
 
-    if ($usuario) {
-        // Verificar la contraseña
-        if (md5($contrasena) == $usuario['contrasena']) {
-            // Iniciar sesión
-            $_SESSION['usuario'] = $usuario;
-            header('Location: index.php'); // Redirige a la página de inicio
-        } else {
-            echo "Contraseña incorrecta";
-        }
-    } else {
-        echo "Correo no encontrado";
-    }
+     // Validar las credenciales en la base de datos
+     $stmt = $con->prepare("SELECT * FROM usuario WHERE correo = :correo AND contrasena = :contrasena");
+     $stmt->bindParam(':correo', $correo, PDO::PARAM_STR);
+     $stmt->bindParam(':contrasena', $contrasenaEncript, PDO::PARAM_STR);
+     $stmt->execute();
+     $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
+ 
+     if ($usuario && $contrasenaEncript) 
+     {
+        $_SESSION['correo'] = $correo;
+        header('Location: index.php');
+     } 
+     else 
+     {
+        echo "Credenciales incorrectas. Por favor, inténtalo de nuevo.";
+     }
 }
 
-
+ 
 
