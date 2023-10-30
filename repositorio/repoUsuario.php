@@ -1,5 +1,6 @@
 <?php
-    class repoUsuario {
+    class repoUsuario 
+    {
     
         public function __construct($con) {
             $this->con = $con;
