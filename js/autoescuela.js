@@ -16,12 +16,12 @@ window.addEventListener("load", function()
             fetch("/servidor/pregunta.json")
             .then(x=>x.json())
             .then(y=>{
-                for(let i = 0; i< y.length; i++)
+                for(let i = 0; i< y.preguntas.length; i++)
                 {
                     var pregAux = pregunta.cloneNode(true);
-                    pregAux.getElementsByClassName("numero")[0].innerHTML=y[i].numero;
-                    pregAux.getElementsByClassName("categoria")[0].innerHTML=y[i].categoria;
-                    pregAux.getElementsByClassName("descripcion")[0].innerHTML=y[i].descripcion;
+                    pregAux.getElementsByClassName("id")[0].innerHTML=y.preguntas[i].id;
+                    pregAux.getElementsByClassName("categoria")[0].innerHTML=y.preguntas[i].categoria;
+                    pregAux.getElementsByClassName("dificultad")[0].innerHTML=y[i].dificultad;
                     pregAux.getElementsByClassName("borrar")[0].onclick=function()
                     {
                         var auxPadre = this;

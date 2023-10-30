@@ -1,17 +1,37 @@
-[
-    {
-        "numero":1,
-        "categoria":"motor",
-        "descripcion":"¿Qué es para motor?"
+
+{
+    "examen": {
+      "id": 1,
+      "creador": "Nombre del Creador del Examen"
     },
-    {
-        "numero":2,
-        "categoria":"circuito",
-        "descripcion":"¿Entra rotonda?"
-    },
-    {
-        "numero":3,
-        "categoria":"carga",
-        "descripcion":"¿Peso máximo?"
-    }
-]
+    "preguntas": [
+      {
+        "id": 1,
+        "categoria": "motor",
+        "dificultad": "media",
+        "recurso": true,
+        "tipoRecurso": "PDF",
+        "url": "",
+        "respuesta": "A"
+      },
+      {
+        "id": 2,
+        "categoria": "circuito",
+        "dificultad": "alta",
+        "recurso": true,
+        "tipoRecurso": "Video",
+        "url": "",
+        "respuesta": "C"
+      },
+      {
+        "id": 3,
+        "categoria": "carga",
+        "dificultad": "baja",
+        "recurso": true,
+        "tipoRecurso": "Enlace",
+        "url": "",
+        "respuesta": "B"
+      }
+    ]
+  }
+  

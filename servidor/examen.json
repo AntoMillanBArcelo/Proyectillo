@@ -1,0 +1,18 @@
+[
+    {
+        "numero":1,
+        "categoria":"motor",
+        "descripcion":"¿Qué es para motor?"
+    },
+    {
+        "numero":2,
+        "categoria":"circuito",
+        "descripcion":"¿Entra rotonda?"
+    },
+    {
+        "numero":3,
+        "categoria":"carga",
+        "descripcion":"¿Peso máximo?"
+    }
+]
+ 
