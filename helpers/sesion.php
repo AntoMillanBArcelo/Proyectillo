@@ -1,15 +1,28 @@
 <?php
-    function iniciaSesion()
+class Sesion
+{
+    public static function iniciar()
     {
-        session_start();
+        
     }
 
-    function cierraSesion($location)
+    public static function leer(string $clave)
     {
-        session_destroy();
-        if (!empty($location)) 
-        {
-            header('Location: '.$location);
-        }
+        
     }
-?>
+
+    public static function existe(string $clave)
+    {
+        
+    }
+
+    public static function escribir($clave,$valor)
+    {
+        
+    }
+
+    public static function eliminar($clave)
+    {
+        
+    }
+}

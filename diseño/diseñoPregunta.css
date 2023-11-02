@@ -2,47 +2,49 @@
     margin: 0;
     padding: 0;
 }
-
-.cuerpo{
-    background-image: url(/img/car.png);
-    background-repeat: no-repeat;
-    background-size: auto;
-    width: 100%;
-    height:100vh; 
-    background-size: auto; 
-    background-position: bottom left;
-    background-repeat: no-repeat; 
-    
+body {
+    background: #a8c0ff;
+    font-family: 'Comfortaa', cursive;
+    color: #fff;
+    user-select: none;
+    margin: 0;
+    padding: 0;
+    counter-reset: points;
+}
+section {
+    background: #a8c0ff;
+    background: -webkit-linear-gradient(to right, #3f2b96, #a8c0ff);
+    background: linear-gradient(to right, #3f2b96, #a8c0ff);
+    padding-top: 80px;
+    overflow-y: hidden;
+}
+main {
+    background: rgba(217, 214, 228, 0.12);
+    border-radius: 10px;
+    padding: 5px 20px 50px;
+    width: 95%;
+    max-width: 500px;
+    margin: 0 auto 214px;
+}
+img{
+    border-radius: 25px;
+    width: 500px;
+    padding-top: 15px;
+}
+.quiz-btn {
+    border: 1px solid #000;
+    border-radius: 50px;
+    background: rgb(247, 206, 206);
+    color: #000;
+    display: block;
+    font-size: 1.1rem;
+    font-weight: 600;
+    width: 57%;
+    margin: 0 auto;
+    outline: none;
+    padding: 11px 0;
+    text-align: center;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
 }
 
-.enunciado{
-    background-color: rgb(79, 138, 247);
-    color: white;
-    border-radius: 35px;
-    margin-left: 20%;
-    margin-right: 20%;
-    padding: 20px;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-
-}
-.respuestas{
-    margin-left: 20%;
-    margin-right: 20%;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-}
-.respuestas button{
-    background-color: white;
-    border: 1px;
-    border-color: black;
-    border-style: solid;
-    border-radius:35px;
-    padding: 10px;
-    font-size: medium;
-}
-.respuestas button:hover{
-    background-color:rgb(79, 138, 247) ;
-    color: white;
-}
-select{
-    width: max-content;
-}

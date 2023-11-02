@@ -1,5 +1,7 @@
 <?php
-    function crearFormularioRegistro() 
+class MetodoPintaFormulario
+{
+    public static function crearFormularioRegistro() 
     {
         echo '<h2>Registro</h2>';
         echo '<form method="post" action="">';
@@ -14,7 +16,7 @@
     }
 
 
-function crearFormularioLogin() 
+    public static function crearFormularioLogin() 
     {
         echo '<form method="post" action="">';
         echo '<label for="correo">Correo Electrónico:</label><br>';
@@ -26,4 +28,6 @@ function crearFormularioLogin()
 
         echo '<p>¿No tienes una cuenta? <a href="register.php">Registrarse</a></p>';
     }
+}
+    
 ?>

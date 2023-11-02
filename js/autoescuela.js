@@ -19,9 +19,17 @@ window.addEventListener("load", function()
                 for(let i = 0; i< y.preguntas.length; i++)
                 {
                     var pregAux = pregunta.cloneNode(true);
-                    pregAux.getElementsByClassName("id")[0].innerHTML=y.preguntas[i].id;
-                    pregAux.getElementsByClassName("categoria")[0].innerHTML=y.preguntas[i].categoria;
-                    pregAux.getElementsByClassName("dificultad")[0].innerHTML=y.preguntas[i].dificultad;
+                   
+                    pregAux.getElementsByClassName("enunciado")[0].innerHTML=y.preguntas[i].enunciado;
+                    pregAux.getElementsByClassName("url")[0].src=y.preguntas[i].url;
+                    pregAux.querySelector("input#opcion1").value = y.preguntas[i].opciones[0].opcion1;
+                    pregAux.querySelector("label[for='opcion1']").innerText = y.preguntas[i].opciones[0].opcion1;
+                    
+                    pregAux.querySelector("input#opcion2").value = y.preguntas[i].opciones[0].opcion2;
+                    pregAux.querySelector("label[for='opcion2']").innerText = y.preguntas[i].opciones[0].opcion2;
+                     
+                    pregAux.querySelector("input#opcion3").value = y.preguntas[i].opciones[0].opcion3;
+                    pregAux.querySelector("label[for='opcion3']").innerText = y.preguntas[i].opciones[0].opcion3;
                     pregAux.getElementsByClassName("borrar")[0].onclick=function()
                     {
                         var auxPadre = this;

@@ -1,14 +1,19 @@
 <?php
-    require_once "metodosSesion.php";
-
-    function guardaSesion($user, $usuario)
+class login
+{
+    public static function Identifica(string $usuario,string $contrasena,bool $recuerdame)
     {
-        iniciaSesion();
-        $_SESSION[$user]=$usuario ;
+        
     }
 
-    function estaLogeado()
+    private static function ExisteUsuario(string $usuario,string $contrasena=null)
     {
-        //mirar en la clase $session si esta la clave user
+        
     }
+
+    public static function UsuarioEstaLogueado()
+    {
+        
+    }
+}
 ?>

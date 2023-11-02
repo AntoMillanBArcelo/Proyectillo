@@ -14,11 +14,26 @@
 
         }
     
-        public function insert( $correo, $contrasena) {
+        public function insert( $correo, $contrasena, ) 
+        {
             //FILTER_SANITIZE_EMAIL sirve para evitar problemas de seguridad antes de meterlos en la base de datos
             $correoLimpio = filter_var($correo, FILTER_SANITIZE_EMAIL);
-            $contrasenaEncriptada = md5($contrasena); 
-            $insert = $this->con->query("INSERT INTO usuario (correo, contrasena) VALUES ('$correoLimpio', '$contrasenaEncriptada')");
+            $contrasenaEncriptada = md5($contrasena);
+            
+            // Utiliza una sentencia preparada para insertar datos de manera segura
+            $stmt = $this->con->prepare("INSERT INTO usuario (correo, contrasena) VALUES (:correo, :contrasena)");
+            $stmt->bindParam(':correo', $correoLimpio, PDO::PARAM_STR);
+            $stmt->bindParam(':contrasena', $contrasenaEncriptada, PDO::PARAM_STR);
+            
+            if ($stmt->execute()) 
+            {
+            return true; // La inserción fue exitosa
+            } 
+            else 
+            {
+            return false; // La inserción falló
+            }
+            
         }
     
         public function update($id, $correo, $contrasena) {

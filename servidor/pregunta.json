@@ -7,30 +7,52 @@
     "preguntas": [
       {
         "id": 1,
-        "categoria": "motor",
+        "categoria": "circuito",
         "dificultad": "media",
+        "enunciado": "¿Cuál es la velocidad máxima permitida en una vía urbana o en ciudad?",
         "recurso": true,
         "tipoRecurso": "PDF",
-        "url": "",
-        "respuesta": "A"
+        "url": "/img/preg1.png",
+        "respuesta": "opcion3",
+        "opciones": [
+          {
+            "opcion1": "60 km/h",
+            "opcion2": "90 km/h",
+            "opcion3": "50 km/h"
+          }
+        ]
       },
       {
         "id": 2,
         "categoria": "circuito",
         "dificultad": "alta",
+        "enunciado": "¿Cuál es la distancia mínima de seguridad que debes mantener detrás de un vehículo en una carretera?",
         "recurso": true,
         "tipoRecurso": "Video",
-        "url": "",
-        "respuesta": "C"
+        "url": "/img/preg2.png",
+        "respuesta": "opcion2",
+        "opciones":[
+          {
+            "opcion1":"10 metros",
+            "opcion2":"3 segundos",
+            "opcion3":"50 metros"
+        }
+      ]
       },
       {
         "id": 3,
         "categoria": "carga",
         "dificultad": "baja",
+        "enunciado": "Cuando te aproximas a un paso de peatones sin semáforo ni agente regulador, ¿qué debes hacer?",
         "recurso": true,
         "tipoRecurso": "Enlace",
-        "url": "",
-        "respuesta": "B"
+        "url": "/img/preg3.png",
+        "respuesta": "opcion2",
+        "opciones":[{
+          "opcion1":"Acelerar para cruzar rápidamente.",
+          "opcion2":"Disminuir la velocidad y ceder el paso a los peatones.",
+          "opcion3":"Ignorar el paso de peatones si no hay peatones cruzando."
+      }]
       }
     ]
   }
