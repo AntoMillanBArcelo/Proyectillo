@@ -1,0 +1,39 @@
+body {
+    background: url('/img/Forza_Net_Splash_Page_Motorsport_adb7e0d56b.mp4') no-repeat center center fixed;
+    background-size: cover;
+}
+nav {
+    background-color: #333;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+nav ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    display: flex;
+}
+nav ul li a {
+    color: white;
+    padding: 10px;
+    text-decoration: none;
+    font-size: 20px;
+}
+h1 {
+    text-align: center;
+    margin-top: 100px;
+    color: white;
+    font-size: 50px;
+}
+footer {
+    background-color: yellow;
+    padding: 10px;
+    text-align: center;
+    color: black;
+    font-size: 20px;
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+}
