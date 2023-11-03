@@ -1,54 +1,38 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Autoescuela</title>
-    <link rel="stylesheet" href="css/cssIndex.css">
-</head>
-<body>
-    <video id="video-background" autoplay="autoplay" muted="muted" loop="loop">
-        <source src="img/Forza_Net_Splash_Page_Motorsport_adb7e0d56b.mp4" type="video/mp4">
-       
-    </video>
-
-    <nav>
-        <ul>
-            <li><a href="index.html">Inicio</a></li>
-            <li><a href="login.php">Iniciar sesión</a></li>
-            <li><a href="logout.php">Cerrar sesión</a></li>
-        </ul>
-    </nav>
-  
-    <h1>NOS VEMOS EN LA <br>LÍNEA DE SALIDA</h1> 
-    
-    <footer>© 2023 Antonio Millán</footer>
-</body>
-</html>
-
 <?php
-include_once 'metodos/MetodoPintaMenu.php';
-include_once 'db/db.php';
+include 'metodos/metodoPintaFormulario.php';
 include 'clases/Usuario.php';
-// Llama a la función crearMenu de la clase MetodoPintaMenu para generar el menú.
+include 'repositorio/repoUsuario.php';
+include 'db/db.php';
 $con = db::obtenerConexion();
+metodoPintaFormulario::crearFormularioLogin();
 session_start();
 
-// Corrige los enlaces del menú
-echo '<li><a href="plantilla/plantillaPregunta.html">Pregunta</a></li>';
-echo '<li><a href="plantilla/examen.html">Examen</a></li>';
 
-
-// Verifica si el usuario ha iniciado sesión antes de mostrar su información.
-if (isset($_SESSION['user'])) 
+if (isset($_POST['IniciarSesion'])) 
 {
-    echo 'Usuario: ' . $_SESSION['user']->getCorreo(); // Utiliza -> para acceder al método
-    if ($_SESSION['user']->getRol() === 'admin') {
-        echo '<li><a href="crudUsuario.php">Administrar Usuarios</a></li>';
-    }
-    var_dump($_SESSION['user']->getRol());
-} else {
-    echo 'Usuario no ha iniciado sesión';
+      $correo = $_POST['correo'];
+      $contrasena = $_POST['contrasena'];
+      $contrasenaEncript = md5($contrasena);
+
+      // Validar las credenciales en la base de datos
+      $stmt = $con->prepare("SELECT * FROM usuario WHERE correo = :correo AND contrasena = :contrasena");
+      $stmt->bindParam(':correo', $correo, PDO::PARAM_STR);
+      $stmt->bindParam(':contrasena', $contrasenaEncript, PDO::PARAM_STR);
+      $stmt->execute();
+      $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
+ 
+      if ($usuario && $contrasenaEncript) 
+      {
+         $user = new Usuario($usuario['correo'], $usuario['contrasena'], $usuario['rol']);
+         $_SESSION['user'] = $user;
+         $_SESSION['correo'] = $correo;
+         header('Location: inicio.php');
+      } 
+      else 
+      {
+         echo "Credenciales incorrectas. Por favor, inténtalo de nuevo.";
+      }
 }
 
-echo '<li><a href="logout.php">Cerrar Sesión</a></li>';
+ 
+

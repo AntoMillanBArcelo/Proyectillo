@@ -36,6 +36,22 @@ if (isset($_GET['delete'])) {
     $stmt->execute([$id]);
 }
 ?>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>crud</title>
+    <link rel="stylesheet" href="css/styleCRUD.css">
+</head>
+<body>
+<nav>
+        <ul>
+            <li><a href="index.php">Inicio</a></li>
+            <li><a href="login.php">Iniciar sesión</a></li>
+            <li><a href="logout.php">Cerrar sesión</a></li>
+        </ul>
+    </nav>
 <form method="POST">
     <input type="text" name="correo" placeholder="correo">
     <input type="contrasena" name="contrasena" placeholder="contrasena">
@@ -57,3 +73,6 @@ if (isset($_GET['delete'])) {
         </li>
     <?php endforeach; ?>
 </ul>
+</body>
+</html>
+
