@@ -6,8 +6,9 @@ $con = db::obtenerConexion();
 if (isset($_POST['create'])) {
     $correo = $_POST['correo'];
     $contrasena = $_POST['contrasena'];
+    $rol = $_POST['rol'];
 
-    $stmt = $con->prepare("INSERT INTO usuarios (correo, contrasena) VALUES (?, ?)");
+    $stmt = $con->prepare("INSERT INTO usuarios (correo, contrasena, rol) VALUES (?, ?, ?)");
     $stmt->execute([$correo, $contrasena]);
 }
 
@@ -17,22 +18,24 @@ foreach ($usuarios as $usuario) {
     echo "ID: " . $usuario['id'] . "<br>";
     echo "correo: " . $usuario['correo'] . "<br>";
     echo "contrasena: " . $usuario['contrasena'] . "<br>";
+    echo "rol: " . $usuario['rol'] . "<br>";
     echo "<hr>";
 }
 
 if (isset($_POST['update'])) {
     $id = $_POST['id'];
     $correo = $_POST['correo'];
-    $contrasena = $_POST['contrasena'];
+    $rol = $_POST['rol'];
 
-    $stmt = $con->prepare("UPDATE usuarios SET correo = ?, contrasena = ? WHERE id = ?");
-    $stmt->execute([$correo, $contrasena, $id]);
+    $stmt = $con->prepare("UPDATE usuario SET correo = ?, rol = ? WHERE id = ?");
+    $stmt->execute([$correo, $rol, $id]);
 }
+
 
 if (isset($_GET['delete'])) {
     $id = $_GET['delete'];
 
-    $stmt = $con->prepare("DELETE FROM usuarios WHERE id = ?");
+    $stmt = $con->prepare("DELETE FROM usuario WHERE id = ?");
     $stmt->execute([$id]);
 }
 ?>
@@ -47,8 +50,7 @@ if (isset($_GET['delete'])) {
 <body>
 <nav>
         <ul>
-            <li><a href="index.php">Inicio</a></li>
-            <li><a href="login.php">Iniciar sesión</a></li>
+            <li><a href="inicio.php">Inicio</a></li>
             <li><a href="logout.php">Cerrar sesión</a></li>
         </ul>
     </nav>
@@ -61,7 +63,7 @@ if (isset($_GET['delete'])) {
 <form method="POST">
     <input type="text" name="id" placeholder="ID a Editar">
     <input type="text" name="correo" placeholder="Nuevo correo">
-    <input type="contrasena" name="contrasena" placeholder="Nuevo contrasena">
+    <input type="text" name="rol" placeholder="rol">
     <button type="submit" name="update">Editar Usuario</button>
 </form>
 
