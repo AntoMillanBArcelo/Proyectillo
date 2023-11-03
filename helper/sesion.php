@@ -23,9 +23,6 @@ class Sesion
 
     public static function eliminar($clave)
     {
-        session_unset();
-        session_destroy();
-        header('Location: index.php');
-        exit;
+        
     }
 }

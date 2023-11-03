@@ -1,12 +1,10 @@
 <?php
-include 'metodos/metodoPintaFormulario.php';
+session_start();
 include 'clases/Usuario.php';
 include 'repositorio/repoUsuario.php';
 include 'db/db.php';
-$con = db::obtenerConexion();
-metodoPintaFormulario::crearFormularioLogin();
-session_start();
 
+$con = db::obtenerConexion();
 
 if (isset($_POST['IniciarSesion'])) 
 {
@@ -33,6 +31,26 @@ if (isset($_POST['IniciarSesion']))
          echo "Credenciales incorrectas. Por favor, inténtalo de nuevo.";
       }
 }
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+   <link rel="stylesheet" href="./css/styleLogin.css">
+</head>
+<body>
+<form method="post" action="">';
+         '<label for="correo">Correo Electrónico:</label><br>';
+         '<input type="email" id="correo" name="correo" maxlength="50" required><br>';
+         '<label for="contrasena">Contraseña:</label><br>';
+         '<input type="password" id="contrasena" name="contrasena" maxlength="50" required><br>';
+         '<input type="submit" value="Iniciar Sesión" name="IniciarSesion">';
+         '</form>';
 
+         '<p>¿No tienes una cuenta? <a href="register.php">Registrarse</a></p>';
+</body>
+</html>
  
 

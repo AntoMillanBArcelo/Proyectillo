@@ -18,49 +18,6 @@ body {
     height: 100%;
     object-fit: cover;
 }
-nav ul li a {
-    position: relative;
-    color: white;
-    padding: 10px;
-    text-decoration: none;
-    font-size: 20px;
-    color: white;
-    padding: 10px;
-    text-decoration: none;
-    font-size: 20px;
-}
-
-
-nav ul li a::after {
-    content: "";
-    position: absolute;
-    width: 0;
-    height: 3px;
-    bottom: 0;
-    left: 50%;
-    background-color: transparent;
-    transition: width 0.3s ease-in-out, background-color 0.3s ease-in-out;
-}
-
-nav ul li a:hover::after,
-nav ul li a.active::after {
-    width: 100%;
-    background-color: yellow;
-    left: 0;
-}
-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    z-index: 1; /* Asegura que el menú esté sobre el video */
-}
-nav ul {
-    margin: 0;
-    padding: 0;
-    list-style-type: none;
-    display: flex;
-}
 
     
 h1 {
@@ -71,40 +28,4 @@ h1 {
     letter-spacing: 5px;
     line-height: 1.5;
 }
-nav ul li a {
-            position: relative;
-            color: white;
-            padding: 10px;
-            text-decoration: none;
-            font-size: 20px;
-        }
 
-        nav ul li a::after {
-            content: "";
-            position: absolute;
-            width: 0;
-            height: 3px;
-            bottom: 0;
-            left: 50%;
-            background-color: transparent;
-            transition: width 0.3s ease-in-out, background-color 0.3s ease-in-out;
-        }
-
-        nav ul li a:hover::after,
-        nav ul li a.active::after {
-            width: 100%;
-            background-color: yellow;
-            left: 0;
-        }
-
-footer {
-    background-color: yellow;
-    padding: 10px;
-    text-align: center;
-    color: black;
-    font-size: 20px;
-    position: absolute;
-    bottom: 0;
-    width: 98.9%;
-    z-index: 1; /* Asegura que el footer esté sobre el video */
-}
