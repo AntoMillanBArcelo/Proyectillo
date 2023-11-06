@@ -3,19 +3,33 @@ class Autocargador
 {
     public static function autocargar()
     {
-        spl_autoload_register('self::autocarga');
-    }
 
-    private static function autocarga($nombreClase)
-    {
-        $directorioBase = __DIR__;
-        $nombreClase = str_replace('\\', DIRECTORY_SEPARATOR, $nombreClase);
-        $rutaArchivo = $directorioBase . DIRECTORY_SEPARATOR . $nombreClase . '.php';
-        if (file_exists($rutaArchivo)) {
-            require_once $rutaArchivo;
-        } else {
-            echo "Clase no encontrada: $nombreClase";
-        }
+        spl_autoload_register(function($clase){
+            $baseDir = $_SERVER['DOCUMENT_ROOT'] . '/';
+            $directorios = [
+                'api',
+                'clases',
+                'css',
+                'db',
+                'diseño',
+                'helpers',
+                'js',
+                'metodos',
+                'plantilla',
+                'repositorio',
+                'servidor'
+            ];
+
+            foreach ($directorios as $directorio) {
+                $archivo = $baseDir . $directorio . '/' . $clase . '.php';
+                if (file_exists($archivo)) {
+                    require_once $archivo;
+                    return;
+                }
+            }  
+
+        });
     }
 }
+    
 Autocargador::autocargar();

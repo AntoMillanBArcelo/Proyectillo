@@ -10,8 +10,10 @@
           
         }
     
-        public function getByCorreo($correo) {
-
+        public function mostrarTodos() 
+        {
+            $query = "SELECT * from examen";
+            $result = $this->con->query($query);
         }
     
         public function insert($fechaIni) {         

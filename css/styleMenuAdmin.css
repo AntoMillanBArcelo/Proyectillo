@@ -1,0 +1,71 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-image: url(/img/fondo.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+nav {
+    background-color: rgba(0, 0, 0, 0.8); /* Cambia la transparencia aquí */
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1; /* Asegura que el menú esté en la parte superior de todo */
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: space-around;
+    background-color: transparent; /* Hace que el fondo del menú sea transparente */
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2); /* Agrega una sombra sutil */
+}
+
+nav li {
+    margin: 0;
+    padding: 0;
+}
+
+nav a {
+    text-decoration: none;
+    color: #333;
+    padding: 10px;
+}
+
+.menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px; /* Ajusta el margen superior para evitar que se solape con el menú */
+}
+
+.card {
+    width: 200px;
+    margin: 0 10px;
+    text-align: center;
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+img {
+    max-width: 100%;
+}
+
+p {
+    margin: 10px 0;
+}
+
+a {
+    text-decoration: none;
+    color: #333;
+}
+
+.card:hover {
+    background-color: #e0e0e0;
+}

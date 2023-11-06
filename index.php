@@ -1,12 +1,8 @@
 <?php
-include 'metodos/metodoPintaFormulario.php';
-include 'clases/Usuario.php';
-include 'repositorio/repoUsuario.php';
-include 'db/db.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/cargador/Autocargador.php';
 $con = db::obtenerConexion();
 metodoPintaFormulario::crearFormularioLogin();
 session_start();
-
 
 if (isset($_POST['IniciarSesion'])) 
 {
@@ -25,7 +21,6 @@ if (isset($_POST['IniciarSesion']))
       {
          $user = new Usuario($usuario['correo'], $usuario['contrasena'], $usuario['rol']);
          $_SESSION['user'] = $user;
-         $_SESSION['correo'] = $correo;
          header('Location: inicio.php');
       } 
       else 
@@ -35,4 +30,4 @@ if (isset($_POST['IniciarSesion']))
 }
 
  
-
+  

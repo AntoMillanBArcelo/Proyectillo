@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'db/db.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/cargador/Autocargador.php';
 $con = db::obtenerConexion();
 
 if (isset($_POST['create'])) {

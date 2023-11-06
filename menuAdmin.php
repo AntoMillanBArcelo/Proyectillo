@@ -2,30 +2,20 @@
 require_once $_SERVER['DOCUMENT_ROOT'].'/cargador/Autocargador.php';
 $con = db::obtenerConexion();
 session_start();
-
-// Corrige los enlaces del menú
-if (!isset($_SESSION['user'])) {
-    header('Location: login.php');
-    exit;
-}
 ?>
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Autoescuela</title>
-    <link rel="stylesheet" href="css/cssIndex.css">
+    <link rel="stylesheet" href="css/styleMenuAdmin.css">
     <link rel="stylesheet" href="css/styleMenuFooter.css">
+    <title>Menú Horizontal</title>
 </head>
 <body>
-    <video id="video-background" autoplay="autoplay" muted="muted" loop="loop">
-        <source src="img/Forza_Net_Splash_Page_Motorsport_adb7e0d56b.mp4" type="video/mp4">       
-    </video>
-
-    <nav>
+<nav>
         <ul>
-            <li><a href="index.html">INICIO</a></li>         
+            <li><a href="inicio.php">INICIO</a></li>         
             <?php if ($_SESSION['user']->getRol() === 'admin') 
             {
             echo '<li><a href="menuAdmin.php">ADMINISTRACIÓN</a></li>';
@@ -34,11 +24,16 @@ if (!isset($_SESSION['user'])) {
             <li><a href="logout.php">CERRAR SESIÓN</a></li>
         </ul>
     </nav>
-  
-    <h1>NOS VEMOS EN LA <br>LÍNEA DE SALIDA</h1> 
-    
+    <div class="menu">
+        <div class="card">
+            <img src="usuario.jpg" alt="Usuario">
+            <p><a href="crudUsuario.php">Usuario</a></p>
+        </div>
+        <div class="card">
+            <img src="examenes.jpg" alt="Examenes">
+            <p><a href="crudExamenes.php">Examenes</a></p>
+        </div>
+    </div>
     <footer>© 2023 Antonio Millán</footer>
 </body>
 </html>
-
-
