@@ -15,6 +15,7 @@ session_start();
 <body>
 <nav>
         <ul>
+            <li><img src="img/Udrive_Logo1.png" alt="" class="logo"></li>
             <li><a href="inicio.php">INICIO</a></li>         
             <?php if ($_SESSION['user']->getRol() === 'admin') 
             {
@@ -26,11 +27,11 @@ session_start();
     </nav>
     <div class="menu">
         <div class="card">
-            <img src="usuario.jpg" alt="Usuario">
+            <img src="img/user.jpg" alt="Usuario">
             <p><a href="crudUsuario.php">Usuario</a></p>
         </div>
         <div class="card">
-            <img src="examenes.jpg" alt="Examenes">
+            <img src="img/text.jpg" alt="Examenes">
             <p><a href="crudExamenes.php">Examenes</a></p>
         </div>
     </div>

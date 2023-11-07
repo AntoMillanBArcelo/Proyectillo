@@ -15,8 +15,9 @@ if (!isset($_SESSION['user'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Autoescuela</title>
-    <link rel="stylesheet" href="css/cssIndex.css">
     <link rel="stylesheet" href="css/styleMenuFooter.css">
+    <link rel="stylesheet" href="css/cssIndex.css">
+    
 </head>
 <body>
     <video id="video-background" autoplay="autoplay" muted="muted" loop="loop">
@@ -25,11 +26,15 @@ if (!isset($_SESSION['user'])) {
 
     <nav>
         <ul>
-            <li><a href="index.html">INICIO</a></li>         
+            <li><img src="img/Udrive_Logo1.png" alt="" class="logo"></li>
+            <li><a href="inicio.php">INICIO</a></li>         
+            <?php if ($_SESSION['user']->getRol() === 'admin'||$_SESSION['user']->getRol() === 'profesor') 
+            {
+                echo '<li><a href="plantilla/examen.html">EXÁMENES</a></li>';
+            }?>
             <?php if ($_SESSION['user']->getRol() === 'admin') 
             {
-            echo '<li><a href="menuAdmin.php">ADMINISTRACIÓN</a></li>';
-            echo '<li><a href="plantilla/examen.html">EXÁMENES</a></li>';
+                echo '<li><a href="menuAdmin.php">ADMINISTRACIÓN</a></li>';
             }?>
             <li><a href="logout.php">CERRAR SESIÓN</a></li>
         </ul>
@@ -38,7 +43,7 @@ if (!isset($_SESSION['user'])) {
     <h1>NOS VEMOS EN LA <br>LÍNEA DE SALIDA</h1> 
     
     <footer>© 2023 Antonio Millán</footer>
-</body>
+</body>  
 </html>
 
 
