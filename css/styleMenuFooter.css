@@ -1,20 +1,17 @@
 .logo {
-    width: 150px; /* Cambia el valor a tu preferencia */
+    width: 150px; 
 }
 
 nav ul li a {
     position: relative;
     color: white;
-    padding: 10px;
     text-decoration: none;
     font-size: 20px;
     color: white;
     padding: 10px;
     text-decoration: none;
     font-size: 20px;
-    
 }
-
 
 nav ul li a::after {
     content: "";
@@ -38,7 +35,7 @@ nav {
     justify-content: space-between;
     align-items: center;
     padding: 10px;
-    z-index: 1; /* Asegura que el menú esté sobre el video */
+    z-index: 1;
     
 }
 nav ul {
@@ -85,12 +82,5 @@ bottom: 0;
 width: 98.9%;
 z-index: 1; /* Asegura que el footer esté sobre el video */
 
-}
-nav ul li {
-    margin-left: 20px; /* Espacio entre elementos del menú */
-}
-
-nav ul li:first-child {
-    margin-left: 0; /* Elimina el espacio antes del primer elemento del menú */
 }
 

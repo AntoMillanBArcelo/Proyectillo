@@ -12,9 +12,9 @@ class Autocargador
                 'css',
                 'db',
                 'diseño',
-                'helpers',
+                'helper',
                 'js',
-                'metodos',
+                'vistas',
                 'plantilla',
                 'repositorio',
                 'servidor'

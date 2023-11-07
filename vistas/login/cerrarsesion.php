@@ -8,4 +8,4 @@ session_unset();
 session_destroy();
 
 // Redirige al usuario a una página de inicio o a donde desees
-header('Location: index.php');
+header('Location: ./vistas/principal/login.php');
