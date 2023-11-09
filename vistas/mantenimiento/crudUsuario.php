@@ -1,9 +1,8 @@
 <?php
-session_start();
-require_once $_SERVER['DOCUMENT_ROOT'].'/cargador/Autocargador.php';
 $con = db::obtenerConexion();
 
-if (isset($_POST['create'])) {
+if (isset($_POST['create'])) 
+{
     $correo = $_POST['correo'];
     $contrasena = $_POST['contrasena'];
     $rol = $_POST['rol'];
@@ -14,13 +13,23 @@ if (isset($_POST['create'])) {
 
 $usuarios = $con->query("SELECT * FROM usuario")->fetchAll(PDO::FETCH_ASSOC);
 
-foreach ($usuarios as $usuario) {
-    echo "ID: " . $usuario['id'] . "<br>";
-    echo "correo: " . $usuario['correo'] . "<br>";
-    echo "contrasena: " . $usuario['contrasena'] . "<br>";
-    echo "rol: " . $usuario['rol'] . "<br>";
-    echo "<hr>";
+echo "<table class='user'>";
+echo "<tr>
+        <th>id</th>
+        <th>correo</th>
+        <th>contraseña</th>
+        <th>rol</th>
+        </tr>";
+foreach ($usuarios as $usuario) 
+{
+    echo "<tr>";
+    echo "<td>" . $usuario['id'] . "</td>";
+    echo "<td>" . $usuario['correo'] . "</td>";
+    echo "<td>" . $usuario['contrasena'] . "</td>";
+    echo "<td>" . $usuario['rol'] . "</td>";
+    echo "</tr>";
 }
+echo '</table>';
 
 if (isset($_POST['update'])) {
     $id = $_POST['id'];
@@ -45,10 +54,11 @@ if (isset($_GET['delete'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>crud</title>
-    <link rel="stylesheet" href="css/styleCRUD.css">
+    <link rel="stylesheet" href="./css/styleCRUD.css">
 </head>
 <body>
-<form method="POST">
+    <div class="contenedor">
+    <form method="POST">
     <input type="text" name="correo" placeholder="correo">
     <input type="contrasena" name="contrasena" placeholder="contrasena">
     <button type="submit" name="create">Crear Usuario</button>
@@ -69,6 +79,8 @@ if (isset($_GET['delete'])) {
         </li>
     <?php endforeach; ?>
 </ul>
+    </div>
+
 </body>
 </html>
 

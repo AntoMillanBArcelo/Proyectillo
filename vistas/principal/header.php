@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>header</title>
     <link rel="stylesheet" href="./css/styleMenuFooter.css">
 </head>
 <body>
@@ -12,7 +9,7 @@
         <ul>
             <li><img src="./img/Udrive_Logo1.png" alt="" class="logo"></li>
             <li><a href="?menu=inicio">INICIO</a></li>         
-            <li><a href="?menu=login">INICIAR SESIÓN</a></li>  
+              
             <?php 
             if (isset($_SESSION['user'])) 
             {
@@ -24,9 +21,14 @@
                 {
                     echo '<li><a href="?menu=menuAdmin">ADMINISTRACIÓN</a></li>';
                 }
+                echo '<li><a href="?menu=cerrarsesion">CERRAR SESIÓN</a></li>';
+            }
+            else 
+            {
+                echo ' <li><a href="?menu=login">INICIAR SESIÓN</a></li>';
             }
             ?>
-            <li><a href="?menu=cerrarsesion">CERRAR SESIÓN</a></li>
+           
             
         </ul>
     </nav>

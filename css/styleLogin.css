@@ -1,31 +1,30 @@
-.body {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #000000;
+body {
+    background: url('/img/xlarge_Forza_Motorsport_Preview_Press_Kit_08_16x9_93fa4842dc.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    
 }
-
+nav{
+    background-color: black;
+}
 .containerr {
-    width: 100vw; /* Ancho del contenedor igual al ancho de la ventana del navegador */
-    height: 100vh; /* Alto del contenedor igual al alto de la ventana del navegador */
+    display: flex;
+    width: 100vw; 
+    height: 93vh;
     display: grid;
     grid-template-columns: 1fr 1fr; /* Divide la pantalla en dos columnas */
-    background: url('/img/xlarge_Forza_Motorsport_Preview_Press_Kit_08_16x9_93fa4842dc.png') center/cover; 
+   
 }
-
 .right {
     background-color: rgba(255, 255, 255, 0.9); /* Fondo blanco translúcido */
     padding: 20px;
 }
-
 h1 {
     font-size: 20px;
     margin-bottom: 20px;
     text-align: center;
+    margin: 0;
+    color: black;
 }
 
 form {
@@ -54,8 +53,9 @@ input[type="password"] {
 }
 
 input[type="submit"] {
-    background: #007bff;
-    color: #fff;
+    margin-top: 20px;
+    background: rgb(231, 231, 2);
+    color: black;
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
@@ -67,9 +67,6 @@ a {
     color: #007bff;
 }
 
-a:hover {
-    text-decoration: underline;
-}
 .error{
     color: red;
     position: absolute;

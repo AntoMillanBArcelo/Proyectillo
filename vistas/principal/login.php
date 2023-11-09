@@ -1,6 +1,4 @@
 <?php
-$con = db::obtenerConexion();
-
 if (isset($_POST['IniciarSesion'])) 
 {
       $correo = $_POST['correo'];
@@ -19,7 +17,7 @@ if (isset($_POST['IniciarSesion']))
          session_start();
          $user = new Usuario($usuario['correo'], $usuario['contrasena'], $usuario['rol']);
          $_SESSION['user'] = $user;
-         header('Location: ?menu=layout.php');
+         header('Location: index.php');
       } 
       else 
       {
@@ -29,7 +27,7 @@ if (isset($_POST['IniciarSesion']))
 ?>
 
 <head>
-   <link rel="stylesheet" type="text/css" href="./css/styleIndex.css">
+   <link rel="stylesheet" type="text/css" href="./css/styleLogin.css">
 </head>
 <body>
    <div class='body'>
@@ -42,7 +40,7 @@ if (isset($_POST['IniciarSesion']))
                <input type="text" id="correo" name="correo" maxlength="50" required><br>
                <label for="contrasena">Contraseña:</label><br>
                <input type="password" id="contrasena" name="contrasena" maxlength="50" required><br>
-               <p>¿No tienes una cuenta? <a href="register.php">Regístrate</a></p>
+               <p>¿No tienes una cuenta? <a href="?menu=register">Regístrate</a></p>
                <input type="submit" value="Iniciar Sesión" name="IniciarSesion">
            </form>
        </div>
