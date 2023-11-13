@@ -1,7 +1,11 @@
 window.addEventListener("load", function() 
 {
     var btnComenzar = document.getElementById("comenzar");
-    var divExamen = document.getElementById("examen");   
+    var divExamen = document.getElementById("examen");  
+    document.getElementById("anterior").addEventListener("click", mostrarPreguntaAnterior);
+    document.getElementById("siguiente").addEventListener("click", mostrarSiguientePregunta); 
+    var preguntas;
+    var preguntaActualIndex = 0;
 
     btnComenzar.addEventListener("click", comenzar);
 
@@ -51,5 +55,28 @@ window.addEventListener("load", function()
                 }
             })
         })   
+        cargarPreguntas();
+        mostrarPregunta();
+    }
+
+    function mostrarSiguientePregunta() {
+        if (preguntaActualIndex < preguntas.length - 1) {
+            preguntaActualIndex++;
+            mostrarPregunta();
+        }
+    }
+
+    function mostrarPreguntaAnterior() {
+        if (preguntaActualIndex > 0) {
+            preguntaActualIndex--;
+            mostrarPregunta();
+        }
+    }
+
+    function mostrarPregunta() {
+        var preguntasHTML = divExamen.getElementsByClassName("pregunta");
+        for (var i = 0; i < preguntasHTML.length; i++) {
+            preguntasHTML[i].style.display = i === preguntaActualIndex ? "block" : "none";
+        }
     }
 })

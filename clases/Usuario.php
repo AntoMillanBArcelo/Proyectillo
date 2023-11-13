@@ -1,5 +1,5 @@
 <?php
-class Usuario {
+class Usuario implements \JsonSerializable{
     private $correo;
     private $contrasena;
     private $rol;
@@ -32,5 +32,9 @@ class Usuario {
 
     public function setRol($rol) {
         $this->rol = $rol;
+    }
+
+    public function toJSON(){
+
     }
 }
