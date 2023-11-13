@@ -7,13 +7,21 @@ window.addEventListener("load", function()
 
     function comenzar() 
     {
-        fetch("/plantilla/pregunta.html") 
+        fetch("../plantilla/pregunta.html") 
         .then(x=>x.text())
         .then(y=>{
             var contenedor = document.createElement("div");
             contenedor.innerHTML = y;
             var pregunta = contenedor.firstChild;
-            fetch("/servidor/pregunta.json")
+
+         /*    fetch("../api/apiExamen.php?id="+1,{
+                method: "GET",
+                headers: {
+                    'content-type':'application/json'
+                }
+            }) */
+            
+            fetch("../js/pregunta.json")
             .then(x=>x.json())
             .then(y=>{
                 for(let i = 0; i< y.preguntas.length; i++)

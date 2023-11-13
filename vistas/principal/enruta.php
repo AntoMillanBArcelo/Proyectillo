@@ -29,6 +29,10 @@ if (isset($_GET['menu']))
     {
         require_once './vistas/principal/register.php';
     }
+    if ($_GET['menu'] == "examen") 
+    {
+        require_once './plantilla/examen.html';
+    }
     
 }
 else

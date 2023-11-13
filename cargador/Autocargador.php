@@ -17,7 +17,8 @@ class Autocargador
                 'vistas',
                 'plantilla',
                 'repositorio',
-                'servidor'
+                'servidor',
+                'cargador'
             ];
 
             foreach ($directorios as $directorio) {

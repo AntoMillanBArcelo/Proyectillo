@@ -3,7 +3,7 @@ class Sesion
 {
     public static function iniciar()
     {
-        
+        session_start();
     }
 
     public static function leer(string $clave)

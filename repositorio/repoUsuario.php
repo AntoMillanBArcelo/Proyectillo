@@ -7,7 +7,23 @@
         }
     
         public function getById($id) {
-          
+            $id = filter_var($id, FILTER_VALIDATE_INT);
+
+            if ($id === false || $id === null) {
+                // Manejar el caso en que el ID no sea válido
+                return null;
+            }
+        
+            $query = "SELECT * FROM usuario WHERE id = $id";
+            $result = $this->con->query($query);
+        
+            if ($result) {
+                $usuario = $result->fetch(PDO::FETCH_ASSOC);
+                return $usuario;
+            } else {
+                // Manejar el caso en que la consulta no fue exitosa
+                return null;
+            }
         }
     
         public function getByCorreo($correo) {

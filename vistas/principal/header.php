@@ -15,7 +15,7 @@
             {
                 if ($_SESSION['user']->getRol() === 'admin'||$_SESSION['user']->getRol() === 'profesor') 
                 {
-                    echo '<li><a href="plantilla/examen.html">EXÁMENES</a></li>';
+                    echo '<li><a href="?menu=examen">EXÁMENES</a></li>';
                 }
                  if ($_SESSION['user']->getRol() === 'admin') 
                 {
