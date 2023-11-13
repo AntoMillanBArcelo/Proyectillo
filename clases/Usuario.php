@@ -1,5 +1,5 @@
 <?php
-class Usuario implements \JsonSerializable{
+class Usuario /* implements \JsonSerializable */{
     private $correo;
     private $contrasena;
     private $rol;
