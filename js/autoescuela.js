@@ -1,10 +1,9 @@
-window.addEventListener("load", function() {
+document.addEventListener("DOMContentLoaded", function() {
     var btnComenzar = document.getElementById("comenzar");
     var divExamen = document.getElementById("examen");
     var preguntas;
     var preguntaActualIndex = 0;
-    document.getElementById("anterior").addEventListener("click", mostrarPreguntaAnterior);
-    document.getElementById("siguiente").addEventListener("click", mostrarSiguientePregunta);
+    var preguntaTemplate;
 
     btnComenzar.addEventListener("click", comenzar);
 
@@ -14,7 +13,7 @@ window.addEventListener("load", function() {
             .then(y => {
                 var contenedor = document.createElement("div");
                 contenedor.innerHTML = y;
-                var pregunta = contenedor.firstChild;
+                preguntaTemplate = contenedor.firstChild;
 
                 fetch("../js/pregunta.json")
                     .then(x => x.json())
@@ -27,7 +26,7 @@ window.addEventListener("load", function() {
     }
 
     function cargarPreguntas() {
-      
+        // Puedes realizar alguna lógica aquí para cargar las preguntas en el HTML
     }
 
     function mostrarSiguientePregunta() {
@@ -45,9 +44,39 @@ window.addEventListener("load", function() {
     }
 
     function mostrarPregunta() {
-        var preguntasHTML = divExamen.getElementsByClassName("pregunta");
-        for (var i = 0; i < preguntasHTML.length; i++) {
-            preguntasHTML[i].style.display = i === preguntaActualIndex ? "block" : "none";
+        // Elimina cualquier pregunta anterior mostrada
+        while (divExamen.firstChild) {
+            divExamen.removeChild(divExamen.firstChild);
         }
+
+        // Clona la plantilla de pregunta para mostrarla
+        var preguntaClonada = divExamen.appendChild(document.importNode(preguntaTemplate, true));
+
+        // Obtén los datos de la pregunta actual
+        var preguntaActual = preguntas[preguntaActualIndex];
+
+        // Llena la pregunta con los datos
+        var enunciadoElement = preguntaClonada.querySelector('.enunciado');
+        var opcionesElements = preguntaClonada.querySelectorAll('form input[type="radio"] + label');
+        var fotoElement = preguntaClonada.querySelector('.url');
+
+        enunciadoElement.textContent = preguntaActual.enunciado;
+
+        opcionesElements.forEach(function(opcion, index) {
+            var opcionData = preguntaActual.opciones[0]; // Supongo que todas las preguntas tienen el mismo formato para las opciones
+            opcion.textContent = opcionData['opcion' + (index + 1)];
+        });
+
+        // Muestra la foto de la pregunta
+        fotoElement.src = preguntaActual.url;
+        fotoElement.alt = "Foto de la pregunta";
+
+        // Agrega eventos a los botones de Anterior y Siguiente
+        var btnAnterior = preguntaClonada.querySelector("#anterior");
+        var btnSiguiente = preguntaClonada.querySelector("#siguiente");
+
+        btnAnterior.addEventListener("click", mostrarPreguntaAnterior);
+        btnSiguiente.addEventListener("click", mostrarSiguientePregunta);
     }
 });
+
