@@ -15,10 +15,10 @@ $usuarios = $con->query("SELECT * FROM usuario")->fetchAll(PDO::FETCH_ASSOC);
 
 echo "<table class='user'>";
 echo "<tr>
-        <th>id</th>
-        <th>correo</th>
-        <th>contraseña</th>
-        <th>rol</th>
+        <th>ID</th>
+        <th>Correo</th>
+        <th>Contraseña</th>
+        <th>Rol</th>
         <th>Acciones</th>
         </tr>";
 foreach ($usuarios as $usuario) 

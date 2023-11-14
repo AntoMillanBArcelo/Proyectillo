@@ -5,6 +5,55 @@ if( $_SESSION['user']->getRol()!= 'admin' && $_SESSION['user']->getRol()!= 'prof
     header("Location: ?menu=inicio");
 } 
 
+/* Examen */
+if (isset($_POST['create'])) 
+{
+    $fechaIni = $_POST['fechaIni'];
+    $stmt = $con->prepare("INSERT INTO examen (fechaIni) VALUES (?)");
+    $stmt->execute([$fechaIni]);
+}
+
+$examenes = $con->query("SELECT * FROM examen;")->fetchAll(PDO::FETCH_ASSOC);
+
+echo "<table class='user'>";
+echo "<tr>
+        <th>ID</th>
+        <th>Fecha de Inicio</th>
+        <th>Acciones</th>
+        </tr>";
+foreach ($examenes as $examen) 
+{
+    echo "<tr>";
+    echo "<td>" . $examen['id'] . "</td>";
+    echo "<td>" . $examen['fechaIni'] . "</td>";
+    echo "<td>
+            <form method='POST'>
+                <input type='hidden' name='examenBorrar' value='" . $examen['id'] . "'>
+                <button type='submit' name='borra'>Eliminar</button>
+            </form>
+          </td>";
+    echo "</tr>";
+}
+echo '</table>';
+
+if (isset($_POST['borra'])) 
+{
+    $id = $_POST['examenBorrar'];
+    $stmt = $con->prepare("DELETE FROM examen WHERE id = ?");
+    $stmt->execute([$id]);    
+}
+
+if (isset($_POST['update'])) 
+{
+    $id = $_POST['id'];
+    $fechaIni = $_POST['fechaIni'];
+
+    $stmt = $con->prepare("UPDATE `examen` SET `fechaIni` = ? WHERE `examen`.`id` = ?");
+    $stmt->execute([$fechaIni, $id]);
+    header("location: ?menu=crudExamenes");
+}
+
+/* Preguntas */
 if (isset($_POST['create'])) 
 {
     $enunciado = $_POST['enunciado'];
@@ -98,9 +147,32 @@ if (isset($_POST['update']))
 </head>
 <body>
     <div class="body">
+    <select id="formSelector2">
+            <option value="showCreate2">Mostrar Crear Examen</option>
+            <option value="showEdit2">Mostrar Editar Examen</option>
+            <option value="hideForm2">Ocultar Formulario</option>
+        </select>
+        <form method="POST" id="createForm2" class="hidden-form2">
+            <label for="fechaIni">Fecha de Inicio:</label>
+            <input type="date" name="fechaIni">
+            <br>
+            <button type="submit" name="create">Crear examen</button>
+        </form>
+
+        <form method="POST" id="editForm2" class="hidden-form2">
+            <input type="text" name="id" placeholder="ID a Editar">
+            <label for="fechaIni">Nueva Fecha de Inicio:</label>
+            <input type="date" name="fechaIni">
+            <br>
+            <button type="submit" name="update">Editar Examen</button>
+        </form>
+
+        
+
         <select id="formSelector">
             <option value="showCreate">Mostrar Crear Pregunta</option>
             <option value="showEdit">Mostrar Editar Pregunta</option>
+            <option value="hideForm">Ocultar Formulario</option>
         </select>
 
         <form method="POST" enctype="multipart/form-data" id="createForm" class="hidden-form">
@@ -146,21 +218,41 @@ if (isset($_POST['update']))
             <br>
             <button type="submit" name="update">Editar Usuario</button>
         </form>
-
+        
+        
 
         <script>
             document.getElementById('formSelector').addEventListener('change', function () {
-                var createForm = document.getElementById('createForm');
-                var editForm = document.getElementById('editForm');
+            var createForm = document.getElementById('createForm');
+            var editForm = document.getElementById('editForm');
 
-                if (this.value === 'showCreate') {
-                    createForm.classList.remove('hidden-form');
-                    editForm.classList.add('hidden-form');
-                } else if (this.value === 'showEdit') {
-                    createForm.classList.add('hidden-form');
-                    editForm.classList.remove('hidden-form');
-                }
-            });
+            if (this.value === 'showCreate') {
+                createForm.classList.remove('hidden-form');
+                editForm.classList.add('hidden-form');
+            } else if (this.value === 'showEdit') {
+                createForm.classList.add('hidden-form');
+                editForm.classList.remove('hidden-form');
+            } else {
+                createForm.classList.add('hidden-form');
+                editForm.classList.add('hidden-form');
+            }
+        });
+
+        document.getElementById('formSelector2').addEventListener('change', function () {
+            var createForm2 = document.getElementById('createForm2');
+            var editForm2 = document.getElementById('editForm2');
+
+            if (this.value === 'showCreate2') {
+                createForm2.classList.remove('hidden-form2');
+                editForm2.classList.add('hidden-form2');
+            } else if (this.value === 'showEdit2') {
+                createForm2.classList.add('hidden-form2');
+                editForm2.classList.remove('hidden-form2');
+            } else {
+                createForm2.classList.add('hidden-form2');
+                editForm2.classList.add('hidden-form2');
+            }
+        });
         </script>
     </div>
 </body>
