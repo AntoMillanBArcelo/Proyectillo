@@ -19,6 +19,7 @@ echo "<tr>
         <th>correo</th>
         <th>contraseña</th>
         <th>rol</th>
+        <th>Acciones</th>
         </tr>";
 foreach ($usuarios as $usuario) 
 {
@@ -27,6 +28,7 @@ foreach ($usuarios as $usuario)
     echo "<td>" . $usuario['correo'] . "</td>";
     echo "<td>" . $usuario['contrasena'] . "</td>";
     echo "<td>" . $usuario['rol'] . "</td>";
+    echo "<td><a href='?delete=" . $usuario['id'] . "'>Eliminar</a></td>";
     echo "</tr>";
 }
 echo '</table>';
@@ -51,9 +53,6 @@ if (isset($_GET['delete'])) {
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>crud</title>
     <link rel="stylesheet" href="./css/styleCRUD.css">
 </head>
 <body>

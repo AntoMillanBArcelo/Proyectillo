@@ -92,6 +92,17 @@ document.addEventListener("DOMContentLoaded", function() {
                 alert("Fin");
             });
         }
+
+        // Agrega evento al botón "Borrar" para desmarcar la opción seleccionada
+        var btnBorrar = preguntaClonada.querySelector(".borrar");
+        btnBorrar.addEventListener("click", function() {
+            // Desmarca la opción seleccionada
+            var opcionesRadio = preguntaClonada.querySelectorAll('form input[type="radio"]');
+            opcionesRadio.forEach(function(opcion) {
+                opcion.checked = false;
+            });
+        });
+        
     }
 });
 

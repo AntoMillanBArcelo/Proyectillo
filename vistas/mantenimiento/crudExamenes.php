@@ -1,26 +1,77 @@
 <?php
-session_start();
-require_once $_SERVER['DOCUMENT_ROOT'].'/cargador/Autocargador.php';
 $con = db::obtenerConexion();
 
-if (isset($_POST['create'])) {
-    $correo = $_POST['correo'];
-    $contrasena = $_POST['contrasena'];
-    $rol = $_POST['rol'];
+if (isset($_POST['create'])) 
+{
+    $enunciado = $_POST['enunciado'];
+    $opcion1 = $_POST['opcion1'];
+    $opcion2 = $_POST['opcion2'];
+    $opcion3 = $_POST['opcion3'];
+    $correcta = $_POST['correcta'];
+    $url = ''; 
 
-    $stmt = $con->prepare("INSERT INTO usuarios (correo, contrasena, rol) VALUES (?, ?, ?)");
-    $stmt->execute([$correo, $contrasena]);
+    if (isset($_FILES['url']) && $_FILES['url']['error'] === UPLOAD_ERR_OK) 
+    {
+        $target_dir = "uploads/"; // Directorio donde se almacenarán las fotos
+        $target_file = $target_dir . basename($_FILES["url"]["name"]);
+        
+        // Mueve el archivo desde el directorio temporal al directorio de destino
+        if (move_uploaded_file($_FILES["url"]["tmp_name"], $target_file)) 
+        {
+            $url = $target_file;
+        } 
+        else 
+        {
+            echo "Error al subir la foto.";
+            // Puedes agregar más lógica aquí para manejar el error de carga
+        }
+    }
+
+    // Insertar datos en la base de datos
+    $stmt = $con->prepare("INSERT INTO pregunta (enunciado, respuesta1, respuesta2, respuesta3, correcta, url) VALUES (?, ?, ?, ?, ?, ?)");
+    $stmt->execute([$enunciado, $opcion1, $opcion2, $opcion3, $correcta, $url]);
 }
 
-$usuarios = $con->query("SELECT * FROM usuario")->fetchAll(PDO::FETCH_ASSOC);
+$preguntas = $con->query("SELECT * FROM pregunta;")->fetchAll(PDO::FETCH_ASSOC);
 
-foreach ($usuarios as $usuario) {
-    echo "ID: " . $usuario['id'] . "<br>";
-    echo "correo: " . $usuario['correo'] . "<br>";
-    echo "contrasena: " . $usuario['contrasena'] . "<br>";
-    echo "rol: " . $usuario['rol'] . "<br>";
-    echo "<hr>";
+echo "<table class='user'>";
+echo "<tr>
+        <th>Enunciado</th>
+        <th>Respuesta 1</th>
+        <th>Respuesta 2</th>
+        <th>Respuesta 3</th>
+        <th>Correcta</th>
+        <th>Acciones</th>
+        </tr>";
+foreach ($preguntas as $pregunta) 
+{
+    echo "<tr>";
+    echo "<td>" . $pregunta['enunciado'] . "</td>";
+    echo "<td>" . $pregunta['respuesta1'] . "</td>";
+    echo "<td>" . $pregunta['respuesta2'] . "</td>";
+    echo "<td>" . $pregunta['respuesta3'] . "</td>";
+    echo "<td>" . $pregunta['correcta'] . "</td>";
+    echo "<td>
+            <form method='POST'>
+                <input type='hidden' name='delete_id' value='" . $pregunta['id'] . "'>
+                <button type='submit' name='delete_submit'>Eliminar</button>
+            </form>
+          </td>";
+    echo "</tr>";
 }
+echo '</table>';
+
+if (isset($_POST['delete_submit'])) {
+    $id = $_POST['delete_id'];
+    $stmt = $con->prepare("DELETE FROM pregunta WHERE id = ?");
+    $stmt->execute([$id]);
+
+    
+}
+
+
+
+
 
 if (isset($_POST['update'])) {
     $id = $_POST['id'];
@@ -30,34 +81,25 @@ if (isset($_POST['update'])) {
     $stmt = $con->prepare("UPDATE usuario SET correo = ?, rol = ? WHERE id = ?");
     $stmt->execute([$correo, $rol, $id]);
 }
-
-
-if (isset($_GET['delete'])) {
-    $id = $_GET['delete'];
-
-    $stmt = $con->prepare("DELETE FROM usuario WHERE id = ?");
-    $stmt->execute([$id]);
-}
 ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>crud</title>
-    <link rel="stylesheet" href="css/styleCRUD.css">
+    <link rel="stylesheet" href="./css/styleCRUD.css">
 </head>
 <body>
-<nav>
-        <ul>
-            <li><a href="inicio.php">Inicio</a></li>
-            <li><a href="logout.php">Cerrar sesión</a></li>
-        </ul>
-    </nav>
-<form method="POST">
-    <input type="text" name="correo" placeholder="correo">
-    <input type="contrasena" name="contrasena" placeholder="contrasena">
-    <button type="submit" name="create">Crear Usuario</button>
+<form method="POST" enctype="multipart/form-data">>
+    <input type="text" name="enunciado" placeholder="Enunciado">
+    <input type="text" name="opcion1" placeholder="Opción 1">
+    <input type="text" name="opcion2" placeholder="Opción 2">
+    <input type="text" name="opcion3" placeholder="Opción 3">
+    <select name="correcta">
+        <option value="1" selected>1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+    </select>
+    <input type="file" name="url" id="foto" accept="image/*">
+    <button type="submit" name="create">Crear pregunta</button>
 </form>
 
 <form method="POST">
@@ -67,14 +109,6 @@ if (isset($_GET['delete'])) {
     <button type="submit" name="update">Editar Usuario</button>
 </form>
 
-<ul>
-    <?php foreach ($usuarios as $usuario): ?>
-        <li>
-            <?php echo $usuario['correo']; ?>
-            (<a href="?delete=<?php echo $usuario['id']; ?>">Eliminar</a>)
-        </li>
-    <?php endforeach; ?>
-</ul>
 </body>
 </html>
 

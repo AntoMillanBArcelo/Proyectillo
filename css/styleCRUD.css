@@ -88,6 +88,6 @@ a {
     margin-left: 10px;
 }
 
-a:hover {
-    color: #c0392b;
+footer{
+    display: none;
 }
