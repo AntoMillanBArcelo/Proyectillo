@@ -22,7 +22,7 @@ if (!isset($_SESSION['user'])) {
 </head>
 <body>
     <video id="video-background" autoplay="autoplay" muted="muted" loop="loop">
-        <source src="img/Forza_Net_Splash_Page_Motorsport_adb7e0d56b.mp4" type="video/mp4">       
+        <source src="/img/Forza_Net_Splash_Page_Motorsport_adb7e0d56b.mp4" type="video/mp4">       
     </video>
   
     <h1>NOS VEMOS EN LA <br>LÍNEA DE SALIDA</h1> 

@@ -1,8 +1,7 @@
 body {
-    background: url('/img/xlarge_Forza_Motorsport_Preview_Press_Kit_08_16x9_93fa4842dc.png');
+    background: url("../img/xlarge_Forza_Motorsport_Preview_Press_Kit_08_16x9_93fa4842dc.png");
     background-size: cover;
     background-repeat: no-repeat;
-    
 }
 nav{
     background-color: black;

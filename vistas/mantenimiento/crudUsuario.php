@@ -30,7 +30,7 @@ foreach ($usuarios as $usuario)
     echo "<td>" . $usuario['rol'] . "</td>";
     echo "<td>
     <form method='POST'>
-            <input type='hidden' name='delete_id' value='" . $pregunta['id'] . "'>
+            <input type='hidden' name='delete_id' value='" . $usuario['id'] . "'>
             <button type='submit' name='delete_submit'>Eliminar</button>
         </form>
     </td>";
@@ -74,15 +74,7 @@ if (isset($_POST['delete_submit'])) {
     <button type="submit" name="update">Editar Usuario</button>
 </form>
 
-<ul>
-    <?php foreach ($usuarios as $usuario): ?>
-        <li>
-            <?php echo $usuario['correo']; ?>
-            (<a href="?delete=<?php echo $usuario['id']; ?>">Eliminar</a>)
-        </li>
-    <?php endforeach; ?>
-</ul>
-    </div>
+</div>
 
 </body>
 </html>

@@ -30,7 +30,6 @@ if (isset($_POST['IniciarSesion']))
       }
 }
 ?>
-
 <head>
    <link rel="stylesheet" type="text/css" href="./css/styleLogin.css">
 </head>

@@ -1,5 +1,5 @@
 body {
-    background: url('/img/regisfondo.png'); 
+    background: url("../img/regisfondo.png"); 
     background-repeat: no-repeat;
     background-size: cover;
 }

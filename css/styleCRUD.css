@@ -2,7 +2,7 @@ body{
     margin: 0;
     padding: 0;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    background-image: url(/img/main_gt7_keyart.jpg);
+    background-image: url(../img/main_gt7_keyart.jpg);
     background-size: cover;
     background-color: rgba(255, 255, 255, 0.5);
 }

@@ -5,7 +5,7 @@ class Autocargador
     {
 
         spl_autoload_register(function($clase){
-            $baseDir = $_SERVER['DOCUMENT_ROOT'] . '/';
+            $baseDir = $_SERVER['DOCUMENT_ROOT'] . '/ProyectoAutoescuela/';
             $directorios = [
                 'api',
                 'clases',
@@ -18,7 +18,8 @@ class Autocargador
                 'plantilla',
                 'repositorio',
                 'servidor',
-                'cargador'
+                'cargador',
+                'img'
             ];
 
             foreach ($directorios as $directorio) {
