@@ -84,13 +84,9 @@ if (isset($_POST['update']))
     $tipoUrl = $_POST['tipoUrl'];
 
     $stmt = $con->prepare("UPDATE `pregunta` 
-    SET `enunciado` = ?, `respuesta1` = ?, 
-    `respuesta2` = ?, `respuesta3` = ?, `correcta` = ?, `url` = ?, `tipoUrl` = ? 
+    SET `enunciado` = ?, `respuesta1` = ?, `respuesta2` = ?, `respuesta3` = ?, `correcta` = ?, `url` = ?, `tipoUrl` = ? 
     WHERE `pregunta`.`id` = ?");
-     $stmt = $con->prepare("UPDATE `pregunta` 
-     SET `enunciado` = ?, `respuesta1` = ?, 
-     `respuesta2` = ?, `respuesta3` = ?, `correcta` = ?, `url` = ?, `tipoUrl` = ? 
-     WHERE `pregunta`.`id` = ?");
+     
      $stmt->execute([$enunciado, $respuesta1, $respuesta2, $respuesta3, $correcta, $url, $tipoUrl, $id]);
      header("location: ?menu=crudExamenes");
 }
@@ -101,65 +97,72 @@ if (isset($_POST['update']))
     <link rel="stylesheet" href="./css/styleCRUD.css">
 </head>
 <body>
-<div class="body">
-<select id="formSelector">
-    <option value="showCreate">Mostrar Crear Pregunta</option>
-    <option value="showEdit">Mostrar Editar Pregunta</option>
-</select>
+    <div class="body">
+        <select id="formSelector">
+            <option value="showCreate">Mostrar Crear Pregunta</option>
+            <option value="showEdit">Mostrar Editar Pregunta</option>
+        </select>
 
-<form method="POST" enctype="multipart/form-data" id="createForm" class="hidden-form">
-    <input type="text" name="enunciado" placeholder="Enunciado">
-    <input type="text" name="opcion1" placeholder="Opción 1">
-    <input type="text" name="opcion2" placeholder="Opción 2">
-    <input type="text" name="opcion3" placeholder="Opción 3">
-    <p>Selecciona la opción correcta</p>
-    <select name="correcta">
-        <option value="1" selected>1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-    </select>
-    <input type="file" name="url" id="foto" accept="image/*">
-    <button type="submit" name="create">Crear pregunta</button>
-</form>
+        <form method="POST" enctype="multipart/form-data" id="createForm" class="hidden-form">
+            <input type="text" name="enunciado" placeholder="Enunciado">
+            <input type="text" name="opcion1" placeholder="Opción 1">
+            <input type="text" name="opcion2" placeholder="Opción 2">
+            <input type="text" name="opcion3" placeholder="Opción 3">
+            <br>
+            <p>Selecciona la opción correcta</p>
+            <br>
+            <select name="correcta">
+                <option value="1" selected>1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select>
+            <br>
+            <input type="file" name="url" id="foto" accept="image/*">
+            <br>
+            <button type="submit" name="create">Crear pregunta</button>
+        </form>
 
-<form method="POST" id="editForm" class="hidden-form">
-    <input type="text" name="id" placeholder="ID a Editar">
-    <input type="text" name="enunciado" placeholder="Nuevo enunciado">
-    <input type="text" name="respuesta1" placeholder="respuesta1">
-    <input type="text" name="respuesta2" placeholder="respuesta2">
-    <input type="text" name="respuesta3" placeholder="respuesta3">
-    <label for="correcta">Seleccione la respuesta correcta:</label>
-    <select name="correcta">
-        <option value="1">Opción 1</option>
-        <option value="2">Opción 2</option>
-        <option value="3">Opción 3</option>
-    </select>
+        <form method="POST" id="editForm" class="hidden-form">
+            <input type="text" name="id" placeholder="ID a Editar">
+            <input type="text" name="enunciado" placeholder="Nuevo enunciado">
+            <input type="text" name="respuesta1" placeholder="respuesta1">
+            <input type="text" name="respuesta2" placeholder="respuesta2">
+            <input type="text" name="respuesta3" placeholder="respuesta3">
+            <br>
+            <label for="correcta">Seleccione la respuesta correcta:</label>
+            <br>
+            <select name="correcta">
+                <option value="1">Opción 1</option>
+                <option value="2">Opción 2</option>
+                <option value="3">Opción 3</option>
+            </select>
+            <br>
+            <label for="tipoUrl">Seleccione el tipo de URL:</label>
+            <br>
+            <select name="tipoUrl">
+                <option value="imagen">Imagen</option>
+                <option value="video">Video</option>
+            </select>
+            <br>
+            <button type="submit" name="update">Editar Usuario</button>
+        </form>
 
-    <label for="tipoUrl">Seleccione el tipo de URL:</label>
-    <select name="tipoUrl">
-        <option value="imagen">Imagen</option>
-        <option value="video">Video</option>
-    </select>
-    <button type="submit" name="update">Editar Usuario</button>
-</form>
 
+        <script>
+            document.getElementById('formSelector').addEventListener('change', function () {
+                var createForm = document.getElementById('createForm');
+                var editForm = document.getElementById('editForm');
 
-<script>
-    document.getElementById('formSelector').addEventListener('change', function () {
-        var createForm = document.getElementById('createForm');
-        var editForm = document.getElementById('editForm');
-
-        if (this.value === 'showCreate') {
-            createForm.classList.remove('hidden-form');
-            editForm.classList.add('hidden-form');
-        } else if (this.value === 'showEdit') {
-            createForm.classList.add('hidden-form');
-            editForm.classList.remove('hidden-form');
-        }
-    });
-</script>
-</div>
-
+                if (this.value === 'showCreate') {
+                    createForm.classList.remove('hidden-form');
+                    editForm.classList.add('hidden-form');
+                } else if (this.value === 'showEdit') {
+                    createForm.classList.add('hidden-form');
+                    editForm.classList.remove('hidden-form');
+                }
+            });
+        </script>
+    </div>
 </body>
 </html>
 
