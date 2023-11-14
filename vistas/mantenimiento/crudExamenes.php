@@ -16,10 +16,9 @@ if (isset($_POST['create']))
 
     if (isset($_FILES['url']) && $_FILES['url']['error'] === UPLOAD_ERR_OK) 
     {
-        $target_dir = "uploads/"; // Directorio donde se almacenarán las fotos
+        $target_dir = "uploads/";
         $target_file = $target_dir . basename($_FILES["url"]["name"]);
         
-        // Mueve el archivo desde el directorio temporal al directorio de destino
         if (move_uploaded_file($_FILES["url"]["tmp_name"], $target_file)) 
         {
             $url = $target_file;
@@ -27,7 +26,6 @@ if (isset($_POST['create']))
         else 
         {
             echo "Error al subir la foto.";
-            // Puedes agregar más lógica aquí para manejar el error de carga
         }
     }
 
@@ -40,6 +38,7 @@ $preguntas = $con->query("SELECT * FROM pregunta;")->fetchAll(PDO::FETCH_ASSOC);
 
 echo "<table class='user'>";
 echo "<tr>
+        <th>ID</th>
         <th>Enunciado</th>
         <th>Respuesta 1</th>
         <th>Respuesta 2</th>
@@ -50,6 +49,7 @@ echo "<tr>
 foreach ($preguntas as $pregunta) 
 {
     echo "<tr>";
+    echo "<td>" . $pregunta['id'] . "</td>";
     echo "<td>" . $pregunta['enunciado'] . "</td>";
     echo "<td>" . $pregunta['respuesta1'] . "</td>";
     echo "<td>" . $pregunta['respuesta2'] . "</td>";
@@ -57,31 +57,42 @@ foreach ($preguntas as $pregunta)
     echo "<td>" . $pregunta['correcta'] . "</td>";
     echo "<td>
             <form method='POST'>
-                <input type='hidden' name='delete_id' value='" . $pregunta['id'] . "'>
-                <button type='submit' name='delete_submit'>Eliminar</button>
+                <input type='hidden' name='preguntaBorrar' value='" . $pregunta['id'] . "'>
+                <button type='submit' name='borra'>Eliminar</button>
             </form>
           </td>";
     echo "</tr>";
 }
 echo '</table>';
 
-if (isset($_POST['delete_submit'])) {
-    $id = $_POST['delete_id'];
+if (isset($_POST['borra'])) 
+{
+    $id = $_POST['preguntaBorrar'];
     $stmt = $con->prepare("DELETE FROM pregunta WHERE id = ?");
     $stmt->execute([$id]);    
 }
 
-
-
-
-
-if (isset($_POST['update'])) {
+if (isset($_POST['update'])) 
+{
     $id = $_POST['id'];
-    $correo = $_POST['correo'];
-    $rol = $_POST['rol'];
+    $enunciado = $_POST['enunciado'];
+    $respuesta1 = $_POST['respuesta1'];
+    $respuesta2 = $_POST['respuesta2'];
+    $respuesta3 = $_POST['respuesta3'];
+    $correcta = $_POST['correcta'];
+    $url = $_POST['url'];
+    $tipoUrl = $_POST['tipoUrl'];
 
-    $stmt = $con->prepare("UPDATE usuario SET correo = ?, rol = ? WHERE id = ?");
-    $stmt->execute([$correo, $rol, $id]);
+    $stmt = $con->prepare("UPDATE `pregunta` 
+    SET `enunciado` = ?, `respuesta1` = ?, 
+    `respuesta2` = ?, `respuesta3` = ?, `correcta` = ?, `url` = ?, `tipoUrl` = ? 
+    WHERE `pregunta`.`id` = ?");
+     $stmt = $con->prepare("UPDATE `pregunta` 
+     SET `enunciado` = ?, `respuesta1` = ?, 
+     `respuesta2` = ?, `respuesta3` = ?, `correcta` = ?, `url` = ?, `tipoUrl` = ? 
+     WHERE `pregunta`.`id` = ?");
+     $stmt->execute([$enunciado, $respuesta1, $respuesta2, $respuesta3, $correcta, $url, $tipoUrl, $id]);
+     header("location: ?menu=crudExamenes");
 }
 ?>
 <!DOCTYPE html>
@@ -90,11 +101,18 @@ if (isset($_POST['update'])) {
     <link rel="stylesheet" href="./css/styleCRUD.css">
 </head>
 <body>
-<form method="POST" enctype="multipart/form-data">>
+<div class="body">
+<select id="formSelector">
+    <option value="showCreate">Mostrar Crear Pregunta</option>
+    <option value="showEdit">Mostrar Editar Pregunta</option>
+</select>
+
+<form method="POST" enctype="multipart/form-data" id="createForm" class="hidden-form">
     <input type="text" name="enunciado" placeholder="Enunciado">
     <input type="text" name="opcion1" placeholder="Opción 1">
     <input type="text" name="opcion2" placeholder="Opción 2">
     <input type="text" name="opcion3" placeholder="Opción 3">
+    <p>Selecciona la opción correcta</p>
     <select name="correcta">
         <option value="1" selected>1</option>
         <option value="2">2</option>
@@ -104,12 +122,43 @@ if (isset($_POST['update'])) {
     <button type="submit" name="create">Crear pregunta</button>
 </form>
 
-<form method="POST">
+<form method="POST" id="editForm" class="hidden-form">
     <input type="text" name="id" placeholder="ID a Editar">
-    <input type="text" name="correo" placeholder="Nuevo correo">
-    <input type="text" name="rol" placeholder="rol">
+    <input type="text" name="enunciado" placeholder="Nuevo enunciado">
+    <input type="text" name="respuesta1" placeholder="respuesta1">
+    <input type="text" name="respuesta2" placeholder="respuesta2">
+    <input type="text" name="respuesta3" placeholder="respuesta3">
+    <label for="correcta">Seleccione la respuesta correcta:</label>
+    <select name="correcta">
+        <option value="1">Opción 1</option>
+        <option value="2">Opción 2</option>
+        <option value="3">Opción 3</option>
+    </select>
+
+    <label for="tipoUrl">Seleccione el tipo de URL:</label>
+    <select name="tipoUrl">
+        <option value="imagen">Imagen</option>
+        <option value="video">Video</option>
+    </select>
     <button type="submit" name="update">Editar Usuario</button>
 </form>
+
+
+<script>
+    document.getElementById('formSelector').addEventListener('change', function () {
+        var createForm = document.getElementById('createForm');
+        var editForm = document.getElementById('editForm');
+
+        if (this.value === 'showCreate') {
+            createForm.classList.remove('hidden-form');
+            editForm.classList.add('hidden-form');
+        } else if (this.value === 'showEdit') {
+            createForm.classList.add('hidden-form');
+            editForm.classList.remove('hidden-form');
+        }
+    });
+</script>
+</div>
 
 </body>
 </html>

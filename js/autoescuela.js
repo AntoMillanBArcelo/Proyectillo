@@ -1,6 +1,7 @@
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     var btnComenzar = document.getElementById("comenzar");
     var divExamen = document.getElementById("examen");
+    var divPaginacion = document.getElementById("paginacion");
     var preguntas;
     var preguntaActualIndex = 0;
     var preguntaTemplate;
@@ -8,25 +9,37 @@ document.addEventListener("DOMContentLoaded", function() {
     btnComenzar.addEventListener("click", comenzar);
 
     function comenzar() {
-        fetch("../plantilla/pregunta.html")
+        fetch("plantilla/pregunta.html")
             .then(x => x.text())
             .then(y => {
                 var contenedor = document.createElement("div");
                 contenedor.innerHTML = y;
                 preguntaTemplate = contenedor.firstChild;
-    
-                fetch("../js/pregunta.json")
+
+                fetch("js/pregunta.json")
                     .then(x => x.json())
                     .then(y => {
                         preguntas = y.preguntas;
-                        cargarPreguntas();
                         mostrarPregunta();
-                    });
+                        mostrarPaginacion();
+                    })
+                    .catch(error => console.error('Error al cargar preguntas:', error));
             });
     }
 
-    function cargarPreguntas() {
-        // Puedes realizar alguna lógica aquí para cargar las preguntas en el HTML
+    function mostrarPaginacion() {
+        for (var i = 0; i < preguntas.length; i++) {
+            var numeroPregunta = i + 1;
+            var botonPagina = document.createElement("button");
+            botonPagina.textContent = numeroPregunta;
+            botonPagina.addEventListener("click", function (index) {
+                return function () {
+                    preguntaActualIndex = index;
+                    mostrarPregunta();
+                };
+            }(i));
+            divPaginacion.appendChild(botonPagina);
+        }
     }
 
     function mostrarSiguientePregunta() {
@@ -63,11 +76,21 @@ document.addEventListener("DOMContentLoaded", function() {
         enunciadoElement.textContent = preguntaActual.enunciado;
 
         opcionesElements.forEach(function(opcion, index) {
-            var opcionData = preguntaActual.opciones[0]; // Supongo que todas las preguntas tienen el mismo formato para las opciones
-            opcion.textContent = opcionData['opcion' + (index + 1)];
+            var opcionData = preguntaActual.opciones[index];
+            opcion.textContent = opcionData;
         });
 
-        // Muestra la foto de la pregunta
+        // Muestra la foto de la pregunta con manejo de errores
+        fotoElement.onload = function() {
+            // La imagen se cargó correctamente
+        };
+        fotoElement.onerror = function() {
+            console.error('Error al cargar la imagen:', preguntaActual.url);
+        };
+        
+        fotoElement.onerror = function() {
+            console.error('Error al cargar la imagen:', preguntaActual.url);
+        };
         fotoElement.src = preguntaActual.url;
         fotoElement.alt = "Foto de la pregunta";
 
@@ -102,7 +125,5 @@ document.addEventListener("DOMContentLoaded", function() {
                 opcion.checked = false;
             });
         });
-        
     }
 });
-

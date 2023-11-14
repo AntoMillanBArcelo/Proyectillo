@@ -48,3 +48,16 @@ img{
     -webkit-tap-highlight-color: transparent;
 }
 
+#paginacion {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+#paginacion span {
+    cursor: pointer;
+    margin: 0 5px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
