@@ -1,3 +1,10 @@
+<?php
+if( $_SESSION['user']->getRol()!= 'admin')
+{
+    header("Location: ?menu=inicio");
+} 
+
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>

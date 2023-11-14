@@ -34,7 +34,7 @@ class Usuario /* implements \JsonSerializable */{
         $this->rol = $rol;
     }
 
-    public function toJSON(){
+    /* public function toJSON(){
 
-    }
+    } */
 }

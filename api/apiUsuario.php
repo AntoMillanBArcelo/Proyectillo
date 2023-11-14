@@ -10,7 +10,9 @@ if ($_SERVER["REQUEST_METHOD"]=="GET")
     $usuario=$repousuario->getById($id);
     $usuarioApi= new stdClass();
     $usuarioApi->id=$id;
-    $usuarioApi->fechaIni=$usuario->getFechaIni();
+    $usuarioApi->correo=$usuario->getCorreo();
+    $usuarioApi->contrasena=$usuario->getContrasena();
+    $usuarioApi->rol=$usuario->getRol();
     echo json_encode($usuarioApi);
 }
 

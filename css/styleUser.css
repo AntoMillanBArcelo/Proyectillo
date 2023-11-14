@@ -1,0 +1,43 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-image: url(/img/fondouser.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.card-container {
+    display: flex;
+    display: flex;
+    justify-content: center; /* Center the cards horizontally */
+    align-items: center; /* Center the cards vertically */
+    margin-top: 200px;
+}
+
+.card {
+    width: 300px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    
+}
+
+.card img {
+    width: 100%;
+    height: auto;
+}
+
+.card p {
+    text-align: center;
+    padding: 10px;
+    background-color: #f8f8f8;
+    margin: 0;
+}
+
+.card a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}

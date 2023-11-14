@@ -11,7 +11,7 @@ $con = db::obtenerConexion();
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Autoescuela</title>
     <link rel="stylesheet" href="./css/cssIndex.css">
-    
+    <link rel="shortcut icon" href="./img/Udrive_Logo2.png" />
 </head>
 
 <body>

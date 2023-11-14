@@ -31,8 +31,12 @@ if (isset($_GET['menu']))
     }
     if ($_GET['menu'] == "examen") 
     {
-        require_once './plantilla/examen.html';
+        require_once './plantilla/examen.php';
     }   
+    if ($_GET['menu'] == "alumno") 
+    {
+        require_once './vistas/principal/alumno.php';
+    }  
 }
 else
 {

@@ -1,5 +1,9 @@
 <?php
-$con = db::obtenerConexion();
+
+if( $_SESSION['user']->getRol()!= 'admin' && $_SESSION['user']->getRol()!= 'profesor')
+{
+    header("Location: ?menu=inicio");
+} 
 
 if (isset($_POST['create'])) 
 {
@@ -64,9 +68,7 @@ echo '</table>';
 if (isset($_POST['delete_submit'])) {
     $id = $_POST['delete_id'];
     $stmt = $con->prepare("DELETE FROM pregunta WHERE id = ?");
-    $stmt->execute([$id]);
-
-    
+    $stmt->execute([$id]);    
 }
 
 

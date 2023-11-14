@@ -5,9 +5,6 @@ if (isset($_POST['IniciarSesion']))
       $contrasena = $_POST['contrasena'];
       $contrasenaEncript = md5($contrasena);
       $val = new Validacion;
-      if(!$val -> Email('correo')){
-         echo "<p class='error'>Credenciales incorrectas. Por favor, inténtalo de nuevo.</p>";
-      }
 
       // Validar las credenciales en la base de datos
       $stmt = $con->prepare("SELECT * FROM usuario WHERE correo = :correo AND contrasena = :contrasena");
@@ -22,7 +19,15 @@ if (isset($_POST['IniciarSesion']))
          $user = new Usuario($usuario['correo'], $usuario['contrasena'], $usuario['rol']);
          $_SESSION['user'] = $user;
          header('Location: index.php');
-      } 
+      }
+      elseif (!$val -> Email('correo')) 
+      {
+         echo "<p class='error'>Credenciales incorrectas. Por favor, inténtalo de nuevo.</p>";
+      }
+      else 
+      {
+         echo "<p class='error'>Credenciales incorrectas. Por favor, inténtalo de nuevo.</p>";
+      }
 }
 ?>
 

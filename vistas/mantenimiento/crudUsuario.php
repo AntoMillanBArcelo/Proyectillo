@@ -28,7 +28,12 @@ foreach ($usuarios as $usuario)
     echo "<td>" . $usuario['correo'] . "</td>";
     echo "<td>" . $usuario['contrasena'] . "</td>";
     echo "<td>" . $usuario['rol'] . "</td>";
-    echo "<td><a href='?delete=" . $usuario['id'] . "'>Eliminar</a></td>";
+    echo "<td>
+    <form method='POST'>
+            <input type='hidden' name='delete_id' value='" . $pregunta['id'] . "'>
+            <button type='submit' name='delete_submit'>Eliminar</button>
+        </form>
+    </td>";
     echo "</tr>";
 }
 echo '</table>';
@@ -43,11 +48,10 @@ if (isset($_POST['update'])) {
 }
 
 
-if (isset($_GET['delete'])) {
-    $id = $_GET['delete'];
-
-    $stmt = $con->prepare("DELETE FROM usuario WHERE id = ?");
-    $stmt->execute([$id]);
+if (isset($_POST['delete_submit'])) {
+    $id = $_POST['delete_id'];
+    $stmt = $con->prepare("DELETE FROM pregunta WHERE id = ?");
+    $stmt->execute([$id]);    
 }
 ?>
 <!DOCTYPE html>

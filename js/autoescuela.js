@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 var contenedor = document.createElement("div");
                 contenedor.innerHTML = y;
                 preguntaTemplate = contenedor.firstChild;
-
+    
                 fetch("../js/pregunta.json")
                     .then(x => x.json())
                     .then(y => {
