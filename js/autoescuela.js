@@ -76,7 +76,22 @@ document.addEventListener("DOMContentLoaded", function() {
         var btnSiguiente = preguntaClonada.querySelector("#siguiente");
 
         btnAnterior.addEventListener("click", mostrarPreguntaAnterior);
-        btnSiguiente.addEventListener("click", mostrarSiguientePregunta);
+
+        if (preguntaActualIndex < preguntas.length - 1) {
+            // Si no es la última pregunta, agrega el evento al botón "Siguiente"
+            btnSiguiente.addEventListener("click", mostrarSiguientePregunta);
+        } else {
+            // Si es la última pregunta, agrega un botón "Enviar" con el evento correspondiente
+            var btnEnviar = document.createElement("button");
+            btnEnviar.textContent = "Enviar";
+            btnEnviar.id = "enviar";
+            preguntaClonada.querySelector("main").appendChild(btnEnviar);
+
+            btnEnviar.addEventListener("click", function() {
+                // Realiza la lógica de envío o muestra el mensaje "Fin"
+                alert("Fin");
+            });
+        }
     }
 });
 

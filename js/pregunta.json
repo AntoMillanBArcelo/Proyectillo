@@ -7,7 +7,7 @@
     "preguntas": [
       {
         "id": 1,
-        "categoria": "circuito",
+        "categoria": "Conducción segura",
         "dificultad": "media",
         "enunciado": "¿Cuál es la velocidad máxima permitida en una vía urbana o en ciudad?",
         "recurso": true,
@@ -23,19 +23,19 @@
         ]
       },
       {
-        "id": 2,
-        "categoria": "circuito",
+        "id": 4,
+        "categoria": "Conducción segura",
         "dificultad": "alta",
-        "enunciado": "¿Cuál es la distancia mínima de seguridad que debes mantener detrás de un vehículo en una carretera?",
+        "enunciado": "¿Cuál es la forma correcta de proceder al acercarse a un cruce no regulado?",
         "recurso": true,
         "tipoRecurso": "Video",
-        "url": "/img/preg2.png",
+        "url": "/img/cruce.jpg",
         "respuesta": "opcion2",
         "opciones":[
           {
-            "opcion1":"10 metros",
-            "opcion2":"3 segundos",
-            "opcion3":"50 metros"
+            "opcion1":"Acelerar para cruzar rápidamente.",
+            "opcion2":"Reducir la velocidad y ceder el paso a los vehículos que se aproximan desde la derecha.",
+            "opcion3":"Ignorar a los demás conductores y continuar sin cambiar la velocidad."
         }
       ]
       },
@@ -43,22 +43,22 @@
         "id": 2,
         "categoria": "circuito",
         "dificultad": "alta",
-        "enunciado": "¿Cuál es la distancia mínima de seguridad que debes mantener detrás de un vehículo en una carretera?",
+        "enunciado": "¿Qué indica una línea amarilla continua en el borde de la calzada?",
         "recurso": true,
         "tipoRecurso": "Video",
-        "url": "/img/preg2.png",
-        "respuesta": "opcion2",
+        "url": "/img/preg7.png",
+        "respuesta": "opciona",
         "opciones":[
           {
-            "opcion1":"10 metros",
-            "opcion2":"3 segundos",
-            "opcion3":"50 metros"
+            "opcion1":"Prohibición de adelantar.",
+            "opcion2":"Adelantamiento permitido.",
+            "opcion3":"Zona de estacionamiento."
         }
       ]
       },
       {
         "id": 3,
-        "categoria": "carga",
+        "categoria": "Normas de tráfico",
         "dificultad": "baja",
         "enunciado": "Cuando te aproximas a un paso de peatones sin semáforo ni agente regulador, ¿qué debes hacer?",
         "recurso": true,
@@ -69,7 +69,67 @@
           "opcion1":"Acelerar para cruzar rápidamente.",
           "opcion2":"Disminuir la velocidad y ceder el paso a los peatones.",
           "opcion3":"Ignorar el paso de peatones si no hay peatones cruzando."
-      }]
+        }]
+      },
+      {
+        "id": 5,
+        "categoria": "Normas de tráfico",
+        "dificultad": "baja",
+        "enunciado": "¿Qué significa una señal de tráfico triangular con borde rojo?",
+        "recurso": true,
+        "tipoRecurso": "Enlace",
+        "url": "./img/preg5.png",
+        "respuesta": "opcion1",
+        "opciones":[{
+          "opcion1":"Peligro.",
+          "opcion2":"Obligación",
+          "opcion3":"Prohibición."
+        }]
+      },
+      {
+        "id": 6,
+        "categoria": "Señales de tráfico",
+        "dificultad": "baja",
+        "enunciado": "En una autopista, ¿cuál es la velocidad máxima permitida en condiciones normales?",
+        "recurso": true,
+        "tipoRecurso": "Enlace",
+        "url": "./img/preg.png",
+        "respuesta": "opcionc",
+        "opciones":[{
+          "opcion1":"80 km/h.",
+          "opcion2":"100 km/h.",
+          "opcion3":"120 km/h."
+        }]
+      },
+      {
+        "id": 7,
+        "categoria": "Señales de tráfico",
+        "dificultad": "baja",
+        "enunciado": "¿Cuál es la distancia de seguridad recomendada al seguir a otro vehículo en una carretera?",
+        "recurso": true,
+        "tipoRecurso": "Enlace",
+        "url": "./img/preg6.png",
+        "respuesta": "opcionb",
+        "opciones":[{
+          "opcion1":"1 metro.",
+          "opcion2":"2 segundos.",
+          "opcion3":"10 metros."
+        }]
+      },
+      {
+        "id": 8,
+        "categoria": "Señales de tráfico",
+        "dificultad": "baja",
+        "enunciado": "En un cruce sin señales de regulación, ¿quién tiene la prioridad de paso?",
+        "recurso": true,
+        "tipoRecurso": "Enlace",
+        "url": "./img/preg8.png",
+        "respuesta": "opcionc",
+        "opciones":[{
+          "opcion1":"El vehículo más grande.",
+          "opcion2":"El vehículo más rápido.",
+          "opcion3":"Ningún vehículo, se aplica la regla de prioridad a la derecha."
+        }]
       }
     ]
   }
