@@ -7,28 +7,39 @@ body{
     background-color: rgba(255, 255, 255, 0.5);
     
 }
-.body {
+
+.column
+{
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: row;
 }
-.column{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: row;
-}
-.hidden-form {
+
+.hidden-form 
+{
     display: none;
 }
-.hidden-form2 {
+
+.hidden-form2 
+{
     display: none;
 }
-.hidden-form3 {
+
+.hidden-form3 
+{
     display: none;
 }
-select {
+#formSelector2
+{
+    margin-left: 32%;
+}
+#formSelector
+{
+    margin-left: 46%;
+}
+select 
+{
     padding: 10px;
     font-size: 16px;
     border: none;
@@ -40,10 +51,17 @@ select {
     margin: 10px;
 }
 
-select:hover {
+select:hover 
+{
     background-color: #f0f0f0;
 }
 
+.btnPreg
+{
+    color: white;
+    font-size: medium;
+    margin-left: 10px;
+}
 
 header
 {
@@ -75,30 +93,45 @@ th
   }
 #createForm
  {
-    background-color:  #ffffff;
+    margin-left: 14%;
+    background-color: #ffffff;
     padding: 20px;
     border-radius: 5px;
+    max-width: 70%;
 }
 #editForm
 {
-    background-color:  #ffffff;
+    margin-left: 14%;
+    background-color: #ffffff;
     padding: 20px;
     border-radius: 5px;
+    max-width: 70%;
 }
-
+.show-below {
+    position: absolute;
+    top: 50%; 
+    left: 0;
+    width: 100%;
+    z-index: 1; 
+}
+.sin-rol {
+   color: yellow; 
+}
 #createForm2
  {
-    background-color:  #ffffff;
+    margin-left: 14%;
+    background-color: #ffffff;
     padding: 20px;
     border-radius: 5px;
-    margin-bottom: 50px;
+    max-width: 70%;
 }
 #editForm2
 {
-    background-color:  #ffffff;
+    margin-left: 14%;
+    background-color: #ffffff;
     padding: 20px;
     border-radius: 5px;
-    margin-bottom: 50px;
+    max-width: 70%;
 }
 #addPreguntasForm{
 
@@ -134,7 +167,8 @@ input {
     border-radius: 4px;
 }
 
-button {
+button 
+{
     background-color: rgb(231, 231, 3);
     color: black;
     padding: 10px 15px;
@@ -158,7 +192,6 @@ li {
 
 a {
     text-decoration: none;
-    color: #e74c3c;
     margin-left: 10px;
 }
 

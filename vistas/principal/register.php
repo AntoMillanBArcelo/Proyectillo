@@ -6,7 +6,7 @@ if (isset($_POST['Registrarse']))
     $correo = $_POST['correo'];
     $contrasena = $_POST['contrasena'];
     $rUsuario = new repoUsuario($con);
-    $rUsuario->insert($correo, $contrasena,);
+    $rUsuario->insertRegister($correo, $contrasena,);
 }
 ?>
 <!DOCTYPE html>

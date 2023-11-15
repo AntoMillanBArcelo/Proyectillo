@@ -11,12 +11,5 @@
     <div id="examen"></div>
     <button id="comenzar">Comenzar</button>
     <br>
-   <!--  <?php
-        if($_SESSION['user']->getRol()==='profesor' || $_SESSION['user']->getRol()==='admin' )
-        {
-            echo 'profesor';
-        }
-    ?> -->
-    
 </body>
 </html>

@@ -37,6 +37,10 @@ if (isset($_GET['menu']))
     {
         require_once './vistas/principal/alumno.php';
     }  
+    if ($_GET['menu'] == "pregunta") 
+    {
+        require_once './vistas/mantenimiento/crudPregunta.php';
+    } 
 }
 else
 {

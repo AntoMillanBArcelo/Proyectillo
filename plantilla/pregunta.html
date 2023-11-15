@@ -1,3 +1,4 @@
+<!-- HTML -->
 <div id="examen">
     <div id="paginacion"></div>
     <div class="pregunta">
@@ -5,29 +6,32 @@
             <main>
                 <h3>
                     <span class="numero">#</span>
-                    <span class="enunciado"></span>
-                    <span class="enunciado">Texto del enunciado</span>
-                </h3>            
-            
+                    <span class="enunciado">{3}</span>
+                </h3>
+                <img src="{4}" alt="">
                 <form action="">
                     <input type="radio" id="opcion1" name="opciones">
-                    <label for="opcion1"></label><br>
+                    <label for="opcion1">{0}</label><br>
                     
                     <input type="radio" id="opcion2" name="opciones">
-                    <label for="opcion2"></label><br>
+                    <label for="opcion2">{1}</label><br>
                     
                     <input type="radio" id="opcion3" name="opciones">
-                    <label for="opcion3"></label><br>
+                    <label for="opcion3">{2}</label><br>
                 </form>
 
+                <!-- Descomenta los botones si deseas habilitarlos
                 <button id="anterior">Anterior</button>
                 <button id="siguiente">Siguiente</button>
+                -->
 
                 <br>  
                 <div><input type="checkbox" value="dudosa" class="dudosa">Dudosa</div><br>
-                <div><button class="borrar">Borrar</button></div>
+                <div><button class="borrar" id="borrar">Borrar</button></div>
+                <button id="siguiente">Siguiente</button>
             </main>
             <br><br>
         </section>
     </div>
+    
 </div>

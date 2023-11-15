@@ -1,60 +1,73 @@
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     var btnComenzar = document.getElementById("comenzar");
     var divExamen = document.getElementById("examen");
     var preguntas;
-    var preguntaActualIndex = 0;
+    var preguntaActual = 0;
 
     if (btnComenzar) {
-        btnComenzar.addEventListener("click", comenzar);
+        btnComenzar.addEventListener("click", function () {
+            fetch("plantilla/pregunta.html")
+                .then(x => x.text())
+                .then(plantilla => {
+                    fetch("js/pregunta.json")
+                        .then(x => x.json())
+                        .then(data => {
+                            preguntas = data.preguntas;
+                            mostrarPregunta(plantilla, preguntaActual);
+                        });
+                });
+        });
     } else {
         console.error("El botón 'comenzar' no se encontró en el DOM.");
     }
 
-    function comenzar() {
-        fetch("plantilla/pregunta.html")
-            .then(x => x.text())
-            .then(y => {
-                var contenedor = document.createElement("div");
-                contenedor.innerHTML = y;
-                var pregunta = contenedor.querySelector(".pregunta"); 
+    function mostrarPregunta(plantilla, indice) {
+        divExamen.innerHTML = ""; // Limpiar el contenido existente
 
-                fetch("js/pregunta.json")
-                    .then(x => x.json())
-                    .then(y => {
-                        preguntas = y;  
-                        mostrarPregunta();
+        var pregunta = preguntas[indice];
 
-                        var btnSiguiente = document.getElementById("siguiente");
-                        var btnAnterior = document.getElementById("anterior");
+        var preguntaHTML = document.createElement("div");
+        preguntaHTML.innerHTML = plantilla
+            .replace("{0}", pregunta.opciones[0].opcion1)
+            .replace("{1}", pregunta.opciones[0].opcion2)
+            .replace("{2}", pregunta.opciones[0].opcion3)
+            .replace("{3}", pregunta.enunciado)
+            .replace("{4}", pregunta.url);
 
-                        if (btnSiguiente && btnAnterior) {
-                            btnSiguiente.addEventListener("click", mostrarSiguientePregunta);
-                            btnAnterior.addEventListener("click", mostrarPreguntaAnterior);
-                        } else {
-                            console.error("Los botones 'siguiente' o 'anterior' no se encontraron en el DOM.");
-                        }
-                    });
+        // Añade la imagen si la pregunta tiene un recurso de tipo "imagen"
+        if (pregunta.recurso && pregunta.tipoRecurso === "imagen") {
+            preguntaHTML.querySelector('img').setAttribute('src', pregunta.url);
+        }
+
+        divExamen.appendChild(preguntaHTML);
+
+        // Añadir evento clic al botón de borrar si existe
+        var btnBorrar = document.getElementById('borrar');
+        if (btnBorrar) {
+            btnBorrar.addEventListener('click', function () {
+                // Encontrar la opción marcada y desmarcarla
+                var opciones = document.querySelectorAll('input[name="opciones"]');
+                opciones.forEach(function (opcion) {
+                    if (opcion.checked) {
+                        opcion.checked = false;
+                    }
+                });
             });
-    }
-
-    function mostrarSiguientePregunta() {
-        if (preguntaActualIndex < preguntas.length - 1) {
-            preguntaActualIndex++;
-            mostrarPregunta();
         }
-    }
 
-    function mostrarPreguntaAnterior() {
-        if (preguntaActualIndex > 0) {
-            preguntaActualIndex--;
-            mostrarPregunta();
-        }
-    }
+        // Añadir evento clic al botón de siguiente
+        var btnSiguiente = document.getElementById("siguiente");
 
-    function mostrarPregunta() {
-        var preguntasHTML = divExamen.getElementsByClassName("pregunta");
-        for (var i = 0; i < preguntasHTML.length; i++) {
-            preguntasHTML[i].style.display = i === preguntaActualIndex ? "block" : "none";
-        }
+        btnSiguiente.addEventListener('click', function () {
+            if (preguntaActual < preguntas.length - 1) {
+                preguntaActual++;
+                mostrarPregunta(plantilla, preguntaActual);
+            } else {
+                // Has llegado al final del examen, puedes realizar alguna acción aquí
+                console.log('Fin del examen');
+            }
+        });
+
+        
     }
 });
