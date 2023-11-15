@@ -63,39 +63,38 @@ if (isset($_POST['update'])) {
 </head>
 <body>
     <div class="body">
-        <select id="formSelector">
-            <option value="showCreate">Mostrar Crear Usuario</option>
-            <option value="showEdit">Mostrar Editar Usuario</option>
-        </select>
+        <div class="column">
+            <select id="formSelector">
+                <option value="showCreate">Mostrar Crear Usuario</option>
+                <option value="showEdit">Mostrar Editar Usuario</option>
+            <form method="POST" enctype="multipart/form-data" id="createForm" class="hidden-form">
+                    <input type="text" name="correo" placeholder="correo">
+                    <input type="contrasena" name="contrasena" placeholder="contrasena">
+                    <label for="rol">Seleccione el rol:</label>
+                    <br>
+                    <select name="rol">
+                        <option value="admin">Admin</option>
+                        <option value="profesor">Profesor</option>
+                        <option value="alumno">Alumno</option>
+                    </select>
+                    <br>
+                    <button type="submit" name="create">Crear Usuario</button>
+                </form>
 
-        
-        <form method="POST" enctype="multipart/form-data" id="createForm" class="hidden-form">
-                <input type="text" name="correo" placeholder="correo">
-                <input type="contrasena" name="contrasena" placeholder="contrasena">
-                <label for="rol">Seleccione el rol:</label>
-                <br>
-                <select name="rol">
-                    <option value="admin">Admin</option>
-                    <option value="profesor">Profesor</option>
-                    <option value="alumno">Alumno</option>
-                </select>
-                <br>
-                <button type="submit" name="create">Crear Usuario</button>
-            </form>
-
-            <form method="POST" id="editForm" class="hidden-form">
-                <input type="text" name="id" placeholder="ID a Editar">
-                <input type="text" name="correo" placeholder="Nuevo correo">
-                <label for="rol">Seleccione el rol:</label>
-                <br>
-                <select name="rol">
-                    <option value="admin">Admin</option>
-                    <option value="profesor">Profesor</option>
-                    <option value="alumno">Alumno</option>
-                </select>
-                <br>
-                <button type="submit" name="update">Editar Usuario</button>
-            </form>
+                <form method="POST" id="editForm" class="hidden-form">
+                    <input type="text" name="id" placeholder="ID a Editar">
+                    <input type="text" name="correo" placeholder="Nuevo correo">
+                    <label for="rol">Seleccione el rol:</label>
+                    <br>
+                    <select name="rol">
+                        <option value="admin">Admin</option>
+                        <option value="profesor">Profesor</option>
+                        <option value="alumno">Alumno</option>
+                    </select>
+                    <br>
+                    <button type="submit" name="update">Editar Usuario</button>
+                </form>
+            </div>
         </div>
 
         <script>

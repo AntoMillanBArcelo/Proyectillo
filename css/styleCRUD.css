@@ -11,7 +11,13 @@ body{
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
+    flex-direction: row;
+}
+.column{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
 }
 .hidden-form {
     display: none;
@@ -31,7 +37,7 @@ select {
     background-color: #fff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     cursor: pointer;
-    margin-bottom: 20px;
+    margin: 10px;
 }
 
 select:hover {

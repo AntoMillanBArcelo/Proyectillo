@@ -1,12 +1,14 @@
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function() {
     var btnComenzar = document.getElementById("comenzar");
     var divExamen = document.getElementById("examen");
-    var divPaginacion = document.getElementById("paginacion");
     var preguntas;
     var preguntaActualIndex = 0;
-    var preguntaTemplate;
 
-    btnComenzar.addEventListener("click", comenzar);
+    if (btnComenzar) {
+        btnComenzar.addEventListener("click", comenzar);
+    } else {
+        console.error("El botón 'comenzar' no se encontró en el DOM.");
+    }
 
     function comenzar() {
         fetch("plantilla/pregunta.html")
@@ -14,32 +16,25 @@ document.addEventListener("DOMContentLoaded", function () {
             .then(y => {
                 var contenedor = document.createElement("div");
                 contenedor.innerHTML = y;
-                preguntaTemplate = contenedor.firstChild;
+                var pregunta = contenedor.querySelector(".pregunta"); 
 
                 fetch("js/pregunta.json")
                     .then(x => x.json())
                     .then(y => {
-                        preguntas = y.preguntas;
+                        preguntas = y;  
                         mostrarPregunta();
-                        mostrarPaginacion();
-                    })
-                    .catch(error => console.error('Error al cargar preguntas:', error));
-            });
-    }
 
-    function mostrarPaginacion() {
-        for (var i = 0; i < preguntas.length; i++) {
-            var numeroPregunta = i + 1;
-            var botonPagina = document.createElement("button");
-            botonPagina.textContent = numeroPregunta;
-            botonPagina.addEventListener("click", function (index) {
-                return function () {
-                    preguntaActualIndex = index;
-                    mostrarPregunta();
-                };
-            }(i));
-            divPaginacion.appendChild(botonPagina);
-        }
+                        var btnSiguiente = document.getElementById("siguiente");
+                        var btnAnterior = document.getElementById("anterior");
+
+                        if (btnSiguiente && btnAnterior) {
+                            btnSiguiente.addEventListener("click", mostrarSiguientePregunta);
+                            btnAnterior.addEventListener("click", mostrarPreguntaAnterior);
+                        } else {
+                            console.error("Los botones 'siguiente' o 'anterior' no se encontraron en el DOM.");
+                        }
+                    });
+            });
     }
 
     function mostrarSiguientePregunta() {
@@ -57,73 +52,9 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function mostrarPregunta() {
-        // Elimina cualquier pregunta anterior mostrada
-        while (divExamen.firstChild) {
-            divExamen.removeChild(divExamen.firstChild);
+        var preguntasHTML = divExamen.getElementsByClassName("pregunta");
+        for (var i = 0; i < preguntasHTML.length; i++) {
+            preguntasHTML[i].style.display = i === preguntaActualIndex ? "block" : "none";
         }
-
-        // Clona la plantilla de pregunta para mostrarla
-        var preguntaClonada = divExamen.appendChild(document.importNode(preguntaTemplate, true));
-
-        // Obtén los datos de la pregunta actual
-        var preguntaActual = preguntas[preguntaActualIndex];
-
-        // Llena la pregunta con los datos
-        var enunciadoElement = preguntaClonada.querySelector('.enunciado');
-        var opcionesElements = preguntaClonada.querySelectorAll('form input[type="radio"] + label');
-        var fotoElement = preguntaClonada.querySelector('.url');
-
-        enunciadoElement.textContent = preguntaActual.enunciado;
-
-        opcionesElements.forEach(function(opcion, index) {
-            var opcionData = preguntaActual.opciones[index];
-            opcion.textContent = opcionData;
-        });
-
-        // Muestra la foto de la pregunta con manejo de errores
-        fotoElement.onload = function() {
-            // La imagen se cargó correctamente
-        };
-        fotoElement.onerror = function() {
-            console.error('Error al cargar la imagen:', preguntaActual.url);
-        };
-        
-        fotoElement.onerror = function() {
-            console.error('Error al cargar la imagen:', preguntaActual.url);
-        };
-        fotoElement.src = preguntaActual.url;
-        fotoElement.alt = "Foto de la pregunta";
-
-        // Agrega eventos a los botones de Anterior y Siguiente
-        var btnAnterior = preguntaClonada.querySelector("#anterior");
-        var btnSiguiente = preguntaClonada.querySelector("#siguiente");
-
-        btnAnterior.addEventListener("click", mostrarPreguntaAnterior);
-
-        if (preguntaActualIndex < preguntas.length - 1) {
-            // Si no es la última pregunta, agrega el evento al botón "Siguiente"
-            btnSiguiente.addEventListener("click", mostrarSiguientePregunta);
-        } else {
-            // Si es la última pregunta, agrega un botón "Enviar" con el evento correspondiente
-            var btnEnviar = document.createElement("button");
-            btnEnviar.textContent = "Enviar";
-            btnEnviar.id = "enviar";
-            preguntaClonada.querySelector("main").appendChild(btnEnviar);
-
-            btnEnviar.addEventListener("click", function() {
-                // Realiza la lógica de envío o muestra el mensaje "Fin"
-                alert("Fin");
-            });
-        }
-
-        // Agrega evento al botón "Borrar" para desmarcar la opción seleccionada
-        var btnBorrar = preguntaClonada.querySelector(".borrar");
-        btnBorrar.addEventListener("click", function() {
-            // Desmarca la opción seleccionada
-            var opcionesRadio = preguntaClonada.querySelectorAll('form input[type="radio"]');
-            opcionesRadio.forEach(function(opcion) {
-                opcion.checked = false;
-            });
-        });
     }
 });
