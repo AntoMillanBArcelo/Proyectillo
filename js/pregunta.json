@@ -12,7 +12,7 @@
         "enunciado": "¿Cuál es la velocidad máxima permitida en una vía urbana o en ciudad?",
         "recurso": true,
         "tipoRecurso": "PDF",
-       
+        "url":"",
         "respuesta": "opcion3",
         "opciones": [
           {
@@ -29,7 +29,7 @@
         "enunciado": "¿Cuál es la forma correcta de proceder al acercarse a un cruce no regulado?",
         "recurso": true,
         "tipoRecurso": "Video",
-       
+        "url":"",
         "respuesta": "opcion2",
         "opciones":[
           {
@@ -46,7 +46,7 @@
         "enunciado": "¿Qué indica una línea amarilla continua en el borde de la calzada?",
         "recurso": true,
         "tipoRecurso": "Video",
-        
+        "url":"",
         "respuesta": "opciona",
         "opciones":[
           {
@@ -63,7 +63,7 @@
         "enunciado": "Cuando te aproximas a un paso de peatones sin semáforo ni agente regulador, ¿qué debes hacer?",
         "recurso": true,
         "tipoRecurso": "Enlace",
-        
+        "url":"",
         "respuesta": "opcion2",
         "opciones":[{
           "opcion1":"Acelerar para cruzar rápidamente.",
@@ -78,7 +78,7 @@
         "enunciado": "¿Qué significa una señal de tráfico triangular con borde rojo?",
         "recurso": true,
         "tipoRecurso": "Enlace",
-       
+        "url":"",
         "respuesta": "opcion1",
         "opciones":[{
           "opcion1":"Peligro.",
@@ -93,7 +93,7 @@
         "enunciado": "En una autopista, ¿cuál es la velocidad máxima permitida en condiciones normales?",
         "recurso": true,
         "tipoRecurso": "Enlace",
-       
+        "url":"",
         "respuesta": "opcionc",
         "opciones":[{
           "opcion1":"80 km/h.",
@@ -122,7 +122,7 @@
         "enunciado": "En un cruce sin señales de regulación, ¿quién tiene la prioridad de paso?",
         "recurso": true,
         "tipoRecurso": "Enlace",
-       
+        "url":"",
         "respuesta": "opcionc",
         "opciones":[{
           "opcion1":"El vehículo más grande.",
