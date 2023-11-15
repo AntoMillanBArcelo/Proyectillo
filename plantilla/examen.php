@@ -8,8 +8,9 @@
     <link rel="stylesheet" href="diseño/diseñoPregunta.css">
 </head>
 <body>
-    <div id="examen"></div>
-    <button id="comenzar">Comenzar</button>
-    <br>
+    <div class="body">
+        <div id="examen"></div>
+        <button id="comenzar" class="bnt">Comenzar</button>
+    </div>
 </body>
 </html>

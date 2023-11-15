@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (btnComenzar) {
         btnComenzar.addEventListener("click", function () {
+            btnComenzar.style.display = "none";
             fetch("plantilla/pregunta.html")
                 .then(x => x.text())
                 .then(plantilla => {
@@ -68,6 +69,18 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
 
+        var btnAnterior = document.getElementById("anterior");
+
+        btnAnterior.addEventListener('click', function () {
+            if (preguntaActual > 0) {
+                preguntaActual--;
+                mostrarPregunta(plantilla, preguntaActual);
+            } else {
+                // Has llegado al inicio del examen
+                console.log('Inicio del examen');
+            }
+        });
+        
         
     }
 });
