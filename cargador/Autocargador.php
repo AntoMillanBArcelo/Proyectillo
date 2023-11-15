@@ -5,7 +5,7 @@ class Autocargador
     {
 
         spl_autoload_register(function($clase){
-            $baseDir = $_SERVER['DOCUMENT_ROOT'] . '/ProyectoAutoescuela/';
+            $baseDir = $_SERVER['DOCUMENT_ROOT'] . '/';
             $directorios = [
                 'api',
                 'clases',

@@ -30,33 +30,34 @@
 
         }
     
-        public function insert( $correo, $contrasena, ) 
+        public function insert($correo, $contrasena, $rol) 
         {
             //FILTER_SANITIZE_EMAIL sirve para evitar problemas de seguridad antes de meterlos en la base de datos
             $correoLimpio = filter_var($correo, FILTER_SANITIZE_EMAIL);
             $contrasenaEncriptada = md5($contrasena);
             
-            // Utiliza una sentencia preparada para insertar datos de manera segura
-            $stmt = $this->con->prepare("INSERT INTO usuario (correo, contrasena) VALUES (:correo, :contrasena)");
+            $stmt = $this->con->prepare("INSERT INTO usuario (correo, contrasena, rol) VALUES (:correo, :contrasena, :rol)");
             $stmt->bindParam(':correo', $correoLimpio, PDO::PARAM_STR);
             $stmt->bindParam(':contrasena', $contrasenaEncriptada, PDO::PARAM_STR);
+            $stmt->bindParam(':rol', $rol, PDO::PARAM_STR);
             
             if ($stmt->execute()) 
             {
-            return true; // La inserción fue exitosa
+                return true; // La inserción fue exitosa
             } 
             else 
             {
-            return false; // La inserción falló
+                return false; // La inserción falló
             }
-            
         }
+
     
-        public function update($id, $correo, $contrasena) {
+        public function update($id, $correo, $contrasena, $rol) 
+        {
             //FILTER_SANITIZE_EMAIL sirve para evitar problemas de seguridad antes de meterlos en la base de datos
             $correoLimpio = filter_var($correo, FILTER_SANITIZE_EMAIL);
             $contrasenaEncriptada = md5($contrasena);
-            $query = "UPDATE usuario SET correo = '$correoLimpio', contrasena = '$contrasenaEncriptada' WHERE id = $id";
+            $query = "UPDATE usuario SET correo = '$correoLimpio', contrasena = '$contrasenaEncriptada', rol = '$rol' WHERE id = $id";
             $result = $this->con->query($query);
         }
     
