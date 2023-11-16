@@ -17,11 +17,13 @@ if (isset($_POST['createExamen']))
     // Obtener el ID del examen recién creado
     $examenId = $con->lastInsertId();
 
-    // Asignar preguntas seleccionadas al nuevo examen
-    if (!empty($_POST['preguntasSeleccionadas'])) {
+    // Asignar preguntas seleccionadas al examen
+    if (!empty($_POST['preguntasSeleccionadas'])) 
+    {
         $preguntasSeleccionadas = $_POST['preguntasSeleccionadas'];
         
-        foreach ($preguntasSeleccionadas as $preguntaId) {
+        foreach ($preguntasSeleccionadas as $preguntaId) 
+        {
             $stmt = $con->prepare("INSERT INTO examen_pregunta (examen_id, pregunta_id) VALUES (?, ?)");
             $stmt->execute([$examenId, $preguntaId]);
         }
@@ -48,11 +50,13 @@ foreach ($examenes as $examen)
                                         JOIN examen_pregunta pe ON p.id = pe.pregunta_id
                                         WHERE pe.examen_id = ?");
     $preguntasAsociadas->execute([$examen['id']]);
+
     $preguntas = $preguntasAsociadas->fetchAll(PDO::FETCH_ASSOC);
 
     // Mostrar las preguntas en una lista
     echo "<td>";
-    foreach ($preguntas as $pregunta) {
+    foreach ($preguntas as $pregunta) 
+    {
         echo $pregunta['enunciado'] . "<br>";
     }
     echo "</td>";
@@ -73,13 +77,16 @@ echo '</table>';
 echo "<form method='POST' id='addPreguntasForm' class='hidden-form3'>";
 echo "<label for='examen_id'>Selecciona el examen:</label>";
 echo "<select name='examen_id'>";
-foreach ($examenes as $examen) {
+foreach ($examenes as $examen) 
+{
     echo "<option value='" . $examen['id'] . "'>" . $examen['id'] . " - " . $examen['fechaIni'] . "</option>";
 }
 echo "</select>";
 echo "<br>";
+
 // Agregar tres desplegables para seleccionar preguntas
-for ($i = 1; $i <= 3; $i++) {
+for ($i = 1; $i <= 3; $i++) 
+{
     echo "<label for='pregunta{$i}_id'>Selecciona pregunta {$i}:</label>";
     echo "<br>";
     echo "<select name='pregunta{$i}_id'>";
@@ -109,7 +116,8 @@ if (isset($_POST['agregarPreguntas']))
 }
 
 /* ----------Borra Examen----------- */
-if (isset($_POST['borra']) && isset($_POST['examenBorrar'])) {
+if (isset($_POST['borra']) && isset($_POST['examenBorrar'])) 
+{
     $id = $_POST['examenBorrar'];
 
     // Eliminar registros relacionados en examen_pregunta
@@ -203,7 +211,8 @@ if (isset($_POST['updateExamen']))
     }
 });
 
-document.getElementById('formSelector3').addEventListener('change', function () {
+document.getElementById('formSelector3').addEventListener('change', function () 
+{
     var addPreguntasForm = document.getElementById('addPreguntasForm');
 
     if (this.value === 'showCreate3') 

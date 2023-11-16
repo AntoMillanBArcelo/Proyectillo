@@ -1,6 +1,3 @@
-<?php
-
-?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -21,6 +18,5 @@
         <p><a href="?menu=crudExamenes">Correción</a></p>
     </div>
 </div>
-
 </body>
 </html>

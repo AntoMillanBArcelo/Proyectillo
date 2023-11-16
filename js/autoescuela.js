@@ -5,8 +5,10 @@ document.addEventListener("DOMContentLoaded", function () {
     var preguntaActual = 0;
     var preguntasPorPagina = 1;
 
-    if (btnComenzar) {
-        btnComenzar.addEventListener("click", function () {
+    if (btnComenzar) 
+    {
+        btnComenzar.addEventListener("click", function () 
+        {
             btnComenzar.style.display = "none";
             fetch("plantilla/pregunta.html")
                 .then(x => x.text())
@@ -20,11 +22,14 @@ document.addEventListener("DOMContentLoaded", function () {
                         });
                 });
         });
-    } else {
+    } 
+    else 
+    {
         console.error("El botón 'comenzar' no se encontró en el DOM.");
     }
 
-    function mostrarPregunta(plantilla, indice) {
+    function mostrarPregunta(plantilla, indice) 
+    {
         divExamen.innerHTML = ""; // Limpiar el contenido existente
 
         var pregunta = preguntas[indice];
@@ -37,8 +42,8 @@ document.addEventListener("DOMContentLoaded", function () {
             .replace("{3}", pregunta.enunciado)
             .replace("{4}", pregunta.url);
 
-        // Añade la imagen si la pregunta tiene un recurso de tipo "imagen"
-        if (pregunta.recurso && pregunta.tipoRecurso === "imagen") {
+        if (pregunta.recurso && pregunta.tipoRecurso === "imagen") 
+        {
             preguntaHTML.querySelector('img').setAttribute('src', pregunta.url);
         }
 
@@ -46,21 +51,25 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Añadir evento clic al botón de borrar si existe
         var btnBorrar = document.getElementById('borrar');
-        if (btnBorrar) {
-            btnBorrar.addEventListener('click', function () {
+        if (btnBorrar) 
+        {
+            btnBorrar.addEventListener('click', function () 
+            {
                 // Encontrar la opción marcada y desmarcarla
                 var opciones = document.querySelectorAll('input[name="opciones"]');
-                opciones.forEach(function (opcion) {
-                    if (opcion.checked) {
+                opciones.forEach(function (opcion) 
+                {
+                    if (opcion.checked) 
+                    {
                         opcion.checked = false;
                     }
                 });
             });
 
-            // Inicializar divPaginacion
             var divPaginacion = document.getElementById("paginacion");
 
-            if (divPaginacion) {
+            if (divPaginacion) 
+            {
                 mostrarPaginacion(preguntaActual);
             }
         }
@@ -68,13 +77,17 @@ document.addEventListener("DOMContentLoaded", function () {
         // Añadir evento clic al botón de siguiente
         var btnSiguiente = document.getElementById("siguiente");
 
-        btnSiguiente.addEventListener('click', function () {
-            if (preguntaActual < preguntas.length - 1) {
+        btnSiguiente.addEventListener('click', function () 
+        {
+            if (preguntaActual < preguntas.length - 1) 
+            {
                 preguntaActual++;
                 mostrarPregunta(plantilla, preguntaActual);
                 mostrarPaginacion(preguntaActual);
-            } else {
-                // Has llegado al final del examen, puedes realizar alguna acción aquí
+            } 
+            else 
+            {
+                //final del examen
                 console.log('Fin del examen');
             }
         });
@@ -83,40 +96,52 @@ document.addEventListener("DOMContentLoaded", function () {
         var btnAnterior = document.getElementById("anterior");
 
         btnAnterior.addEventListener('click', function () {
-            if (preguntaActual > 0) {
+            if (preguntaActual > 0) 
+            {
                 preguntaActual--;
                 mostrarPregunta(plantilla, preguntaActual);
                 mostrarPaginacion(preguntaActual);
-            } else {
+            } 
+            else 
+            {
                 // Has llegado al inicio del examen
                 console.log('Inicio del examen');
             }
         });
     }
 
-    function mostrarPaginacion(paginaSeleccionada) {
+    function mostrarPaginacion(paginaSeleccionada) 
+    {
         var divPaginacion = document.getElementById("paginacion");
-
-        if (divPaginacion) {
+    
+        if (divPaginacion) 
+        {
             divPaginacion.innerHTML = "";
-
+    
             // Calcular el número total de páginas
             var totalPaginas = Math.ceil(preguntas.length / preguntasPorPagina);
-
-            for (var i = 1; i <= totalPaginas; i++) {
+    
+            for (var i = 1; i <= totalPaginas; i++) 
+            {
                 var pagina = document.createElement("span");
                 pagina.textContent = i;
-                pagina.addEventListener('click', function (event) {
-                    var paginaSeleccionada = parseInt(event.target.textContent);
-                    preguntaActual = (paginaSeleccionada - 1) * preguntasPorPagina;
-                    mostrarPregunta(preguntaActual);
-                });
-
+                pagina.addEventListener('click', (function (indice) {
+                    return function () {
+                        preguntaActual = (indice - 1) * preguntasPorPagina;
+                        mostrarPregunta(plantilla, preguntaActual);
+                        mostrarPaginacion(preguntaActual);
+                    };
+                })(i));
+    
+                // Limpiar clases de las páginas anteriores
+                pagina.classList.remove("pagina-actual");
+    
                 // Marcar la página actual
-                if (i === Math.ceil((paginaSeleccionada + 1) / preguntasPorPagina)) {
+                if (i === Math.ceil((paginaSeleccionada + 1) / preguntasPorPagina)) 
+                {
                     pagina.classList.add("pagina-actual");
                 }
-
+    
                 divPaginacion.appendChild(pagina);
             }
         }

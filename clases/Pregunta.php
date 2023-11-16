@@ -1,12 +1,12 @@
 <?php
-class Pregunta {
-    private $enunciado;
-    private $respuesta1;
-    private $respuesta2;
-    private $respuesta3;
-    private $correcta;
-    private $url;
-    private $tipoUrl;
+class Pregunta implements JsonSerializable {
+    public $enunciado;
+    public $respuesta1;
+    public $respuesta2;
+    public $respuesta3;
+    public $correcta;
+    public $url;
+    public $tipoUrl;
 
     public function __construct($enunciado, $respuesta1, $respuesta2, $respuesta3, $correcta, $url, $tipoUrl) {
         $this->enunciado = $enunciado;
@@ -44,5 +44,17 @@ class Pregunta {
 
     public function getTipoUrl() {
         return $this->tipoUrl;
+    }
+
+    public function jsonSerialize() {
+        return [
+            'enunciado' => $this->enunciado,
+            'respuesta1' => $this->respuesta1,
+            'respuesta2' => $this->respuesta2,
+            'respuesta3' => $this->respuesta3,
+            'correcta' => $this->correcta,
+            'url' => $this->url,
+            'tipoUrl' => $this->tipoUrl,
+        ];
     }
 }

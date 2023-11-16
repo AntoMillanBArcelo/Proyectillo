@@ -42,7 +42,4 @@ if (isset($_GET['menu']))
         require_once './vistas/mantenimiento/crudPregunta.php';
     } 
 }
-else
-{
-    require_once './vistas/principal/fondo.php';
-}
+

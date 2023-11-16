@@ -1,11 +1,10 @@
 <?php
 session_start();
-require_once $_SERVER['DOCUMENT_ROOT'].'/cargador/Autocargador.php';
 $con = db::obtenerConexion();
 
 
-// Corrige los enlaces del menú
-if (!isset($_SESSION['user'])) {
+if (!isset($_SESSION['user'])) 
+{
     header('Location: login.php');
     exit;
 }

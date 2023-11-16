@@ -9,6 +9,7 @@ if (isset($_POST['Registrarse']))
     $rUsuario->insertRegister($correo, $contrasena,);
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>

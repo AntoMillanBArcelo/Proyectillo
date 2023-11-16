@@ -1,6 +1,11 @@
 <?php
 $con = db::obtenerConexion();
 
+if( $_SESSION['user']->getRol()!= 'admin')
+{
+    header("Location: ?menu=inicio");
+} 
+
 if (isset($_POST['create'])) 
 {
     $correo = $_POST['correo'];
@@ -22,7 +27,8 @@ echo "<tr>
         <th>Acciones</th>
         </tr>";
 
-foreach ($usuarios as $usuario) {
+foreach ($usuarios as $usuario) 
+{
     // Agregar una clase específica si el usuario no tiene rol
     $rowClass = empty($usuario['rol']) ? 'sin-rol' : '';
 
@@ -42,13 +48,15 @@ foreach ($usuarios as $usuario) {
 
 echo '</table>';
 
-if (isset($_POST['borrar'])) {
+if (isset($_POST['borrar'])) 
+{
     $id = $_POST['usuarioBorrar'];
     $stmt = $con->prepare("DELETE FROM usuario WHERE id = ?");
     $stmt->execute([$id]);    
 }
 
-if (isset($_POST['update'])) {
+if (isset($_POST['update'])) 
+{
     $id = $_POST['id'];
     $correo = $_POST['correo'];
     $rol = $_POST['rol'];
