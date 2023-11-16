@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
     var divExamen = document.getElementById("examen");
     var preguntas;
     var preguntaActual = 0;
+    var preguntasPorPagina = 1;
 
     if (btnComenzar) {
         btnComenzar.addEventListener("click", function () {
@@ -15,6 +16,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         .then(data => {
                             preguntas = data.preguntas;
                             mostrarPregunta(plantilla, preguntaActual);
+                            mostrarPaginacion();
                         });
                 });
         });
@@ -54,6 +56,13 @@ document.addEventListener("DOMContentLoaded", function () {
                     }
                 });
             });
+
+            // Inicializar divPaginacion
+            var divPaginacion = document.getElementById("paginacion");
+
+            if (divPaginacion) {
+                mostrarPaginacion(preguntaActual);
+            }
         }
 
         // Añadir evento clic al botón de siguiente
@@ -63,24 +72,53 @@ document.addEventListener("DOMContentLoaded", function () {
             if (preguntaActual < preguntas.length - 1) {
                 preguntaActual++;
                 mostrarPregunta(plantilla, preguntaActual);
+                mostrarPaginacion(preguntaActual);
             } else {
                 // Has llegado al final del examen, puedes realizar alguna acción aquí
                 console.log('Fin del examen');
             }
         });
 
+        // Añadir evento clic al botón de anterior
         var btnAnterior = document.getElementById("anterior");
 
         btnAnterior.addEventListener('click', function () {
             if (preguntaActual > 0) {
                 preguntaActual--;
                 mostrarPregunta(plantilla, preguntaActual);
+                mostrarPaginacion(preguntaActual);
             } else {
                 // Has llegado al inicio del examen
                 console.log('Inicio del examen');
             }
         });
-        
-        
+    }
+
+    function mostrarPaginacion(paginaSeleccionada) {
+        var divPaginacion = document.getElementById("paginacion");
+
+        if (divPaginacion) {
+            divPaginacion.innerHTML = "";
+
+            // Calcular el número total de páginas
+            var totalPaginas = Math.ceil(preguntas.length / preguntasPorPagina);
+
+            for (var i = 1; i <= totalPaginas; i++) {
+                var pagina = document.createElement("span");
+                pagina.textContent = i;
+                pagina.addEventListener('click', function (event) {
+                    var paginaSeleccionada = parseInt(event.target.textContent);
+                    preguntaActual = (paginaSeleccionada - 1) * preguntasPorPagina;
+                    mostrarPregunta(preguntaActual);
+                });
+
+                // Marcar la página actual
+                if (i === Math.ceil((paginaSeleccionada + 1) / preguntasPorPagina)) {
+                    pagina.classList.add("pagina-actual");
+                }
+
+                divPaginacion.appendChild(pagina);
+            }
+        }
     }
 });
