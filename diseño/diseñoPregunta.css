@@ -14,6 +14,9 @@ body {
     background-size: cover;
     background-repeat: no-repeat;
 }
+form{
+    margin-left: 30%;
+}
 .body
 {
     display: flex;

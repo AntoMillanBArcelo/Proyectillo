@@ -4,7 +4,9 @@ document.addEventListener("DOMContentLoaded", function () {
     var preguntas;
     var preguntaActual = 0;
     var preguntasPorPagina = 1;
-
+    /* const userId = obtenerIdUsuario(); // Asume que esta función obtiene el ID del usuario actualmente autenticado
+    const urlUsuarioExamen = `api/apiUsuarioExamen.php?userId=${userId}`; */
+    
     if (btnComenzar) 
     {
         btnComenzar.addEventListener("click", function () 
@@ -88,7 +90,7 @@ document.addEventListener("DOMContentLoaded", function () {
             else 
             {
                 //final del examen
-                console.log('Fin del examen');
+                window.location.href = '?menu=examen';
             }
         });
 

@@ -1,10 +1,10 @@
 <?php
 if (isset($_GET['menu'])) 
 {
-    if ($_GET['menu'] == "inicio") 
+    /* if ($_GET['menu'] == "inicio") 
     {
         require_once './vistas/principal/fondo.php';
-    }
+    } */
     if ($_GET['menu'] == "menuAdmin") 
     {
         require_once './vistas/mantenimiento/menuAdmin.php';
