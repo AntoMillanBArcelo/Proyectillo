@@ -12,6 +12,8 @@ if (isset($_POST['Registrarse']))
         $contrasena = $_POST['contrasena'];
         $rUsuario = new repoUsuario($con);
         $rUsuario->insertRegister($correo, $contrasena);
+        header('Location: ?menu=login');
+        exit();
     } 
     else 
     {
@@ -20,9 +22,9 @@ if (isset($_POST['Registrarse']))
         {
             echo "<p class='error'>El correo no es válido. Por favor, introduce uno válido.</p>";
         } 
-        elseif (!$val->CadenaRango('contrasena', 255, 6)) 
+        elseif (!$val->CadenaRango('contrasena', 20, 6)) 
         {
-            echo "<p class='error'>La contraseña debe tener entre 6 y 255 caracteres.</p>";
+            echo "<p class='error'>La contraseña debe tener entre 7 y 20 caracteres.</p>";
         }
     }
 }
