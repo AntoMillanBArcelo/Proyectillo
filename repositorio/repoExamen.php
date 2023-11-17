@@ -8,7 +8,8 @@
             $this->con = $con;
         }
     
-        public  function getById($id) {
+        public  function getById($id) 
+        {
             $id = filter_var($id);       
             $query = "SELECT * FROM examen WHERE id = $id";
             $result = $this->con->query($query);
@@ -20,7 +21,8 @@
                 if ($examenData) 
                 {
                     return new Examen($examenData['fechaIni']);
-                } else 
+                }
+                 else 
                 {
                     return null;
                 }
@@ -49,14 +51,14 @@
         
         
     
-        public function update($id, $fechaIni) {
+        public function update($id, $fechaIni) 
+        {
             $query = "UPDATE examen SET fechaIni = :fechaIni WHERE id = :id";
             $stmt = $this->con->prepare($query);
         
             // Obtener la fechaIni directamente del objeto $examen
             $fechaIni = $examen->getFechaIni();
-        
-            // Vincular los valores al parámetro de la consulta preparada
+
             $stmt->bindParam(":fechaIni", $fechaIni, PDO::PARAM_STR);
             $stmt->bindParam(":id", $id, PDO::PARAM_INT);
         

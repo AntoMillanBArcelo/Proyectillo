@@ -88,8 +88,11 @@ echo '</table>';
 if (isset($_POST['borra']) && isset($_POST['preguntaBorrar'])) 
 {
     $id = $_POST['preguntaBorrar'];
-    $stmt = $con->prepare("DELETE FROM pregunta WHERE id = ?");
-    $stmt->execute([$id]);    
+
+    $stmtDeletePregunta = $con->prepare("DELETE FROM pregunta WHERE id = ?");
+    $stmtDeletePregunta->execute([$id]);
+    
+
 }
 
 
@@ -122,8 +125,6 @@ if (isset($_POST['updatePregunta'])) {
 </head>
 <body>
     <div class="body">
-
-    
     <!-- Select de Administracion de Preguntas -->
         <select id="formSelector">
             <option value="showCreate">Mostrar Crear Pregunta</option>
@@ -138,7 +139,12 @@ if (isset($_POST['updatePregunta'])) {
             <input type="text" name="opcion2" placeholder="Opción 2">
             <input type="text" name="opcion3" placeholder="Opción 3">
             <br>
-            <p>Selecciona la opción correcta</p>
+            <label for="correcta">Selecciona la opción correcta:</label>
+            <select name="correcta">
+                <option value="1">Opción 1</option>
+                <option value="2">Opción 2</option>
+                <option value="3">Opción 3</option>
+            </select>
             <br>
             <input type="file" name="url" id="foto" accept="image/*">
             <br>
@@ -147,87 +153,111 @@ if (isset($_POST['updatePregunta'])) {
 
         <!-- Formulario que edita preguntas -->
         <form method="POST" id="editForm" class="hidden-form">
-    <!-- Cambiado a un select -->
-    <label for="id">Seleccione la ID a Editar:</label>
-    <select name="id">
-        <?php
-        // Obtener todas las IDs de la base de datos
-        $ids = $con->query("SELECT id FROM pregunta;")->fetchAll(PDO::FETCH_COLUMN);
 
-        // Crear opciones para el select
-        foreach ($ids as $id) {
-            echo "<option value='$id'>$id</option>";
-        }
-        ?>
-        </select>
-        <br>
-        <input type="text" name="enunciado" placeholder="Nuevo enunciado">
-        <input type="text" name="respuesta1" placeholder="respuesta1">
-        <input type="text" name="respuesta2" placeholder="respuesta2">
-        <input type="text" name="respuesta3" placeholder="respuesta3">
-        <br>
-        <label for="correcta">Seleccione la respuesta correcta:</label>
-        <br>
-        <select name="correcta">
-            <option value="1">Opción 1</option>
-            <option value="2">Opción 2</option>
-            <option value="3">Opción 3</option>
-        </select>
-        <br>
-        <label for="tipoUrl">Seleccione el tipo de URL:</label>
-        <br>
-        <select name="tipoUrl">
-            <option value="imagen">Imagen</option>
-            <option value="video">Video</option>
-        </select>
-        <br>
-        <label for="dificultad">Seleccione la dificultad:</label>
-    <br>
-    <select name="dificultad" required>
-        <?php
-        $dificultades = $con->query("SELECT * FROM dificultad;")->fetchAll(PDO::FETCH_ASSOC);
-        foreach ($dificultades as $dificultad) 
-        {
-            echo "<option value='" . $dificultad['id'] . "'>" . $dificultad['nombre'] . "</option>";
-        }
-        ?>
-    </select>
-    <br>
-    <label for="categoria">Seleccione la categoría:</label>
-    <select name="categoria">
-        <?php
-        $categorias = $con->query("SELECT id, nombre FROM categoria;")->fetchAll(PDO::FETCH_ASSOC);
-        foreach ($categorias as $categoria) 
-        {
-            echo "<option value='{$categoria['id']}'>{$categoria['nombre']}</option>";
-        }
-        ?>
-    </select>
-    <br>
-    <button type="submit" name="updatePregunta">Editar Pregunta</button>
-        <button type="submit" name="updatePregunta">Editar Pregunta</button>
-    </form>
+            <label for="id">Seleccione la ID a Editar:</label>
+            <select name="id">
+                <?php
+                    // Obtener todas las IDs de la base de datos
+                    $ids = $con->query("SELECT id FROM pregunta;")->fetchAll(PDO::FETCH_COLUMN);
+
+                    // Crear opciones para el select
+                    foreach ($ids as $id) 
+                    {
+                        echo "<option value='$id'>$id</option>";
+                    }
+                ?>
+            </select>
+
+            <br>
+
+            <input type="text" name="enunciado" placeholder="Nuevo enunciado">
+            <input type="text" name="respuesta1" placeholder="respuesta1">
+            <input type="text" name="respuesta2" placeholder="respuesta2">
+            <input type="text" name="respuesta3" placeholder="respuesta3">
+
+            <br>
+
+            <label for="correcta">Seleccione la respuesta correcta:</label>
+
+            <br>
+
+            <select name="correcta">
+                <option value="1">Opción 1</option>
+                <option value="2">Opción 2</option>
+                <option value="3">Opción 3</option>
+            </select>
+
+            <br>
+
+            <label for="tipoUrl">Seleccione el tipo de URL:</label>
+
+            <br>
+
+            <select name="tipoUrl">
+                <option value="imagen">Imagen</option>
+                <option value="video">Video</option>
+            </select>
+
+            <br>
+
+            <label for="dificultad">Seleccione la dificultad:</label>
+
+            <br>
+
+            <select name="dificultad" required>
+                <?php
+                    $dificultades = $con->query("SELECT * FROM dificultad;")->fetchAll(PDO::FETCH_ASSOC);
+                    foreach ($dificultades as $dificultad) 
+                    {
+                        echo "<option value='" . $dificultad['id'] . "'>" . $dificultad['nombre'] . "</option>";
+                    }
+                ?>
+            </select>
+
+            <br>
+
+            <label for="categoria">Seleccione la categoría:</label>
+            <select name="categoria">
+                <?php
+                $categorias = $con->query("SELECT id, nombre FROM categoria;")->fetchAll(PDO::FETCH_ASSOC);
+                foreach ($categorias as $categoria) 
+                {
+                    echo "<option value='{$categoria['id']}'>{$categoria['nombre']}</option>";
+                }
+                ?>
+            </select>
+
+            <br>
+
+            <button type="submit" name="updatePregunta">Editar Pregunta</button>
+            <button type="submit" name="updatePregunta">Editar Pregunta</button>
+        </form>
 
         <button class="btnPreg"><a href="?menu=crudExamenes">VER EXAMENES</a></button>
 
         <!-- JavaScript que permite ocultar y mostrar formularios -->
         <script>
-                document.getElementById('formSelector').addEventListener('change', function () 
+            document.getElementById('formSelector').addEventListener('change', function () 
             {
-            var createForm = document.getElementById('createForm');
-            var editForm = document.getElementById('editForm');
+                var createForm = document.getElementById('createForm');
+                var editForm = document.getElementById('editForm');
 
-            if (this.value === 'showCreate') {
-                createForm.classList.remove('hidden-form');
-                editForm.classList.add('hidden-form');
-            } else if (this.value === 'showEdit') {
-                createForm.classList.add('hidden-form');
-                editForm.classList.remove('hidden-form');
-            } else {
-                createForm.classList.add('hidden-form');
-                editForm.classList.add('hidden-form');
-            }
-        });
+                if (this.value === 'showCreate') 
+                {
+                    createForm.classList.remove('hidden-form');
+                    editForm.classList.add('hidden-form');
+                } 
+                else if (this.value === 'showEdit') 
+                {
+                    createForm.classList.add('hidden-form');
+                    editForm.classList.remove('hidden-form');
+                } 
+                else 
+                {
+                    createForm.classList.add('hidden-form');
+                    editForm.classList.add('hidden-form');
+                }
+            });
         </script>
         </div>
 </body>

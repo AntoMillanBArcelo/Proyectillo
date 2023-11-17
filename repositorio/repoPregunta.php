@@ -13,8 +13,9 @@
             $query = "SELECT * FROM `pregunta` WHERE id = $id";
             $result = $this->con->query($query);
         
-            if ($result) {
-                $rowCount = $result->rowCount(); // Utiliza rowCount en PDO
+            if ($result) 
+            {
+                $rowCount = $result->rowCount();
         
                 if ($rowCount > 0) {
                     $row = $result->fetch(PDO::FETCH_ASSOC);
@@ -28,10 +29,14 @@
                         $row['tipoUrl']
                     );
                     return $pregunta;
-                } else {
+                } 
+                else 
+                {
                     return null;
                 }
-            } else {
+            } 
+            else 
+            {
                 return null;
             }
         } 

@@ -140,10 +140,6 @@ if (isset($_POST['updateExamen']))
     $stmt->execute([$fechaIni, $id]);
 }
 
-/* -------------------------Preguntas---------------------------------*/
-
-
-
 ?>
 <!DOCTYPE html>
 <html lang="es">

@@ -1,34 +1,36 @@
 <?php
 if (isset($_POST['IniciarSesion'])) 
 {
-      $correo = $_POST['correo'];
-      $contrasena = $_POST['contrasena'];
-      $contrasenaEncript = md5($contrasena);
-      $val = new Validacion;
+   $correo = $_POST['correo'];
+   $contrasena = $_POST['contrasena'];
+   $contrasenaEncript = md5($contrasena);
+   $val = new Validacion;
 
-      // Validar las credenciales en la base de datos
-      $stmt = $con->prepare("SELECT * FROM usuario WHERE correo = :correo AND contrasena = :contrasena");
-      $stmt->bindParam(':correo', $correo, PDO::PARAM_STR);
-      $stmt->bindParam(':contrasena', $contrasenaEncript, PDO::PARAM_STR);
-      $stmt->execute();
-      $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
- 
-      if ($usuario && $contrasenaEncript) 
-      {
-         session_start();
-         $user = new Usuario($usuario['correo'], $usuario['contrasena'], $usuario['rol']);
-         $_SESSION['user'] = $user;
-         header('Location: index.php');
-      }
-      elseif (!$val -> Email('correo')) 
-      {
-         echo "<p class='error'>Credenciales incorrectas. Por favor, inténtalo de nuevo.</p>";
-      }
-      else 
-      {
-         echo "<p class='error'>Credenciales incorrectas. Por favor, inténtalo de nuevo.</p>";
-      }
+   // Comprueba de que el correo y la contraseña están en la base de datos
+   $stmt = $con->prepare("SELECT * FROM usuario WHERE correo = :correo AND contrasena = :contrasena");
+   $stmt->bindParam(':correo', $correo, PDO::PARAM_STR);
+   $stmt->bindParam(':contrasena', $contrasenaEncript, PDO::PARAM_STR);
+   $stmt->execute();
+   $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
+
+   if ($usuario) 
+   {
+       session_start();
+       $user = new Usuario($usuario['correo'], $usuario['contrasena'], $usuario['rol']);
+       $_SESSION['user'] = $user;
+       header('Location: index.php');
+       exit();
+   } 
+   elseif (!$val->Email('correo')) 
+   {
+      echo "<p class='error'>Credenciales incorrectas. Por favor, inténtalo de nuevo.</p>";
+   } 
+   else 
+   {
+      echo "<p class='error'>Credenciales incorrectas. Por favor, inténtalo de nuevo.</p>";
+   }
 }
+
 ?>
 <head>
    <link rel="stylesheet" type="text/css" href="./css/styleLogin.css">
