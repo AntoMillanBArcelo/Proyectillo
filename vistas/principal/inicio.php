@@ -1,14 +1,4 @@
-<?php
-session_start();
-$con = db::obtenerConexion();
 
-
-if (!isset($_SESSION['user'])) 
-{
-    header('Location: login.php');
-    exit;
-}
-?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -21,7 +11,7 @@ if (!isset($_SESSION['user']))
 </head>
 <body>
     <video id="video-background" autoplay muted loop>
-        <source src="/img/Forza_Net_Splash_Page_Motorsport_adb7e0d56b.mp4" type="video/mp4">       
+        <source src="./img/Forza_Net_Splash_Page_Motorsport_adb7e0d56b.mp4" type="video/mp4">       
     </video>
   
     <h1>NOS VEMOS EN LA <br>LÍNEA DE SALIDA</h1> 

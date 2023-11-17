@@ -1,8 +1,9 @@
 <?php
 
-if( $_SESSION['user']->getRol()!= 'admin' || $_SESSION['user']->getRol()!= 'profesor')
+if( $_SESSION['user']->getRol()!= 'admin' && $_SESSION['user']->getRol()!= 'profesor')
 {
     header("Location: ?menu=inicio");
+    exit();
 } 
 
 

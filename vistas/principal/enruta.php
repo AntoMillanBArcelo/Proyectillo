@@ -1,10 +1,10 @@
 <?php
 if (isset($_GET['menu'])) 
 {
-    /* if ($_GET['menu'] == "inicio") 
+    if ($_GET['menu'] == "inicio") 
     {
-        require_once './vistas/principal/fondo.php';
-    } */
+        require_once './vistas/principal/inicio.php';
+    }
     if ($_GET['menu'] == "menuAdmin") 
     {
         require_once './vistas/mantenimiento/menuAdmin.php';
@@ -41,5 +41,9 @@ if (isset($_GET['menu']))
     {
         require_once './vistas/mantenimiento/crudPregunta.php';
     } 
+}
+else
+{
+    require_once './vistas/principal/inicio.php';
 }
 

@@ -3,10 +3,28 @@ $con = db::obtenerConexion();
 
 if (isset($_POST['Registrarse'])) 
 {
+    $val = new Validacion;
     $correo = $_POST['correo'];
-    $contrasena = $_POST['contrasena'];
-    $rUsuario = new repoUsuario($con);
-    $rUsuario->insertRegister($correo, $contrasena,);
+
+    // Validar el correo electrónico y la longitud de la contraseña
+    if ($val->Email('correo') && $val->CadenaRango('contrasena', 20, 6)) 
+    {
+        $contrasena = $_POST['contrasena'];
+        $rUsuario = new repoUsuario($con);
+        $rUsuario->insertRegister($correo, $contrasena);
+    } 
+    else 
+    {
+        // Mostrar mensaje de error correspondiente
+        if (!$val->Email('correo')) 
+        {
+            echo "<p class='error'>El correo no es válido. Por favor, introduce uno válido.</p>";
+        } 
+        elseif (!$val->CadenaRango('contrasena', 255, 6)) 
+        {
+            echo "<p class='error'>La contraseña debe tener entre 6 y 255 caracteres.</p>";
+        }
+    }
 }
 ?>
 

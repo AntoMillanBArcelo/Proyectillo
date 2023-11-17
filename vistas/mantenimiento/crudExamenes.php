@@ -191,41 +191,41 @@ if (isset($_POST['updateExamen']))
     var editForm2 = document.getElementById('editForm2');
     var addPreguntasForm = document.getElementById('addPreguntasForm');
 
-    if (this.value === 'showCreate2') 
-    {
-        createForm2.classList.remove('hidden-form2');
-        editForm2.classList.add('hidden-form2');
-        addPreguntasForm.classList.add('show-below');
-    } 
-    else if (this.value === 'showEdit2') 
-    {
-        createForm2.classList.add('hidden-form2');
-        editForm2.classList.remove('hidden-form2');
-        addPreguntasForm.classList.add('show-below');
-    } 
-    else 
-    {
-        createForm2.classList.add('hidden-form2');
-        editForm2.classList.add('hidden-form2');
-        addPreguntasForm.classList.remove('show-below');
-    }
-});
+            if (this.value === 'showCreate2') 
+            {
+                createForm2.classList.remove('hidden-form2');
+                editForm2.classList.add('hidden-form2');
+                addPreguntasForm.classList.add('show-below');
+            } 
+            else if (this.value === 'showEdit2') 
+            {
+                createForm2.classList.add('hidden-form2');
+                editForm2.classList.remove('hidden-form2');
+                addPreguntasForm.classList.add('show-below');
+            } 
+            else 
+            {
+                createForm2.classList.add('hidden-form2');
+                editForm2.classList.add('hidden-form2');
+                addPreguntasForm.classList.remove('show-below');
+            }
+        });
 
-document.getElementById('formSelector3').addEventListener('change', function () 
-{
-    var addPreguntasForm = document.getElementById('addPreguntasForm');
+        document.getElementById('formSelector3').addEventListener('change', function () 
+        {
+            var addPreguntasForm = document.getElementById('addPreguntasForm');
 
-    if (this.value === 'showCreate3') 
-    {
-        addPreguntasForm.classList.remove('hidden-form3');
-        addPreguntasForm.classList.add('show-below');
-    } 
-    else 
-    {
-        addPreguntasForm.classList.add('hidden-form3');
-        addPreguntasForm.classList.remove('show-below');
-    }
-});
+            if (this.value === 'showCreate3') 
+            {
+                addPreguntasForm.classList.remove('hidden-form3');
+                addPreguntasForm.classList.add('show-below');
+            } 
+            else 
+            {
+                addPreguntasForm.classList.add('hidden-form3');
+                addPreguntasForm.classList.remove('show-below');
+            }
+        });
 
         </script>
 
